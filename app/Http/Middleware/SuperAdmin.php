@@ -15,7 +15,6 @@ class SuperAdmin
         {
             return redirect('/');
         }
-
         return $next($request);
     }
 }

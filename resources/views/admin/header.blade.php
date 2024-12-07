@@ -15,10 +15,10 @@
             <div class="navbar-header">
                 <a href="" class="navbar-brand">
                     <div class="brand-text brand-big visible text-uppercase">
-                        <strong class="text-primary">Dark</strong><strong>Seller</strong>
+                        <strong class="text-primary">SICOMBO</strong><strong>Seller</strong>
                     </div>
                     <div class="brand-text brand-sm">
-                        <strong class="text-primary">D</strong><strong>S</strong>
+                        <strong class="text-primary">S</strong><strong>S</strong>
                     </div>
                 </a>
                 <button class="sidebar-toggle btn btn-outline-secondary">

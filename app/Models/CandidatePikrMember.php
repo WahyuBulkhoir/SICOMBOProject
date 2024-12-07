@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CandidatePikrMember extends Model
 {
     use HasFactory;
-
+    
     protected $table = 'candidate_pikr_members';
     protected $fillable = [
         'name',

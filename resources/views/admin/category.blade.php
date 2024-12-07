@@ -2,9 +2,7 @@
 <html>
 <head> 
     @include('admin.css')
-
     <link rel="stylesheet" href="{{asset('/admincss/css/custom.css')}}">
-
     <style type="text/css">
         input[type='text'] {
             width: 400px;
@@ -13,7 +11,6 @@
             border-radius: 5px;
             padding: 10px;
         }
-
         .div_deg {
             display: flex;
             justify-content: center;
@@ -21,7 +18,6 @@
             margin: 30px;
             flex-direction: column;
         }
-
         .table_deg {
             text-align: center;
             margin: auto;
@@ -31,7 +27,6 @@
             border-radius: 10px;
             overflow: hidden;
         }
-
         th {
             background-color: skyblue;
             padding: 15px;
@@ -39,13 +34,11 @@
             font-weight: bold;
             color: white;
         }
-
         td {
             color: white;
             padding: 10px;
             border: 1px solid skyblue;
         }
-
         .btn-primary {
             background-color: #007bff;
             border: none;
@@ -54,62 +47,50 @@
             border-radius: 5px;
             margin-left: 10px;
         }
-
         .btn-primary:hover {
             background-color: #0056b3;
         }
     </style>
-
 </head>
 <body>
     @include('admin.header')
-
     @include('admin.sidebar')
-      
     <div class="page-content">
         <div class="page-header">
-            <div class="container-fluid">
-
-                <h1 style="color: white;">Tambah Kategori</h1>
-
-                <div class="div_deg">
-                    <form action="{{url('add_category')}}" method="post">
-                        @csrf
-                        <div>
-                            <input type="text" name="category" required>
-                            <input class="btn btn-primary" type="submit" value="Add Category">
-                        </div>
-                    </form>
-                </div>
-
-                <div>
-                    <table class="table_deg">
-                        <tr>
-                            <th>Category Name</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-
-                        @foreach($data as $data)
-                        <tr>
-                            <td>{{$data->category_name}}</td>
-                            <td>
-                                <a class="btn btn-success" href="{{url('edit_category',$data->id)}}">Edit</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger" onclick="confirmation(event)" href="{{url('delete_category',$data->id)}}">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </table>
-                </div>
-                
-            </div>  
+            <h1 style="color: white; font-size: 20px;">Tambah Kategori</h1>
         </div>
-    </div>
+        <div class="div_deg">
+            <form action="{{url('add_category')}}" method="post">
+                @csrf
+                <div>
+                    <input type="text" name="category" required>
+                    <input class="btn btn-primary" type="submit" value="Add Category">
+                </div>
+            </form>
+        </div>
+        <div>
+            <table class="table_deg">
+                <tr>
+                    <th>Category Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
 
+                @foreach($data as $data)
+                <tr>
+                    <td>{{$data->category_name}}</td>
+                    <td>
+                        <a class="btn btn-success" href="{{url('edit_category',$data->id)}}">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" onclick="confirmation(event)" href="{{url('delete_category',$data->id)}}">Delete</a>
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div> 
+        @include('admin.footer')
+    </div>
     @include('admin.js')
-  
 </body>
 </html>

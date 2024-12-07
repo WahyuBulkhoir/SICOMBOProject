@@ -13,7 +13,6 @@
                         Sistem Informasi<br>
                         E-Commerce<br> 
                         Bukit Gado-Gado
-
                       </h1>
                       <p style="color: white;">
                         Sebuah wadah yang menyediakan fitur untuk menjual produk-produk kerajinan tangan yang dihasilkan oleh Remaja Bukit Gado-gado dan juga sebagai wadah untuk memperkenalkan PIK-R Bukit Gado-gado ke masyarakat Indonesia bahkan dunia.

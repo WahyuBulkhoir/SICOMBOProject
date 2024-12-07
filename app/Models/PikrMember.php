@@ -14,6 +14,7 @@ class PikrMember extends Model
         'name',
         'email',
         'phone',
+        'address',
         'jenis_kelamin',
     ];
 }

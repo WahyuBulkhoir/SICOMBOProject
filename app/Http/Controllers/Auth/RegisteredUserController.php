@@ -31,10 +31,13 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'confirmed', 'min:8', Rules\Password::defaults()],
+        ], [
+            'email.unique' => 'Email sudah dipakai, gunakan email lain.',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            'password.min' => 'Password setidaknya harus memiliki 8 karakter.',
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -42,11 +45,10 @@ class RegisteredUserController extends Controller
             'address' => $request->address,
             'password' => Hash::make($request->password),
         ]);
-
         event(new Registered($user));
-
         Auth::login($user);
-
+        session()->flash('success', 'Registrasi berhasil! Silahkan cek email kamu ya untuk verifikasi.');
         return redirect(route('dashboard', absolute: false));
     }
+
 }

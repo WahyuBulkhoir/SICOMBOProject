@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  
   @include('home.css')
-
 </head>
-
     @include('home.header')
-
 <body>
-
   <section class="contact_section ">
     <div class="container px-0">
       <div class="heading_container ">
@@ -30,9 +24,7 @@
         </div>
         <div class="col-md-6 col-lg-5 px-0">
           <form action="#">
-
           @csrf
-
             <div>
               <input type="text" placeholder="Name" />
             </div>
@@ -56,7 +48,5 @@
     </div>
   </section>
   <br><br><br>
-
 </body>
-
 </html>

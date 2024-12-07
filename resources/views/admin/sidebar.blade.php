@@ -1,7 +1,7 @@
 <nav id="sidebar">
     <div class="sidebar-header d-flex align-items-center">
         <div class="avatar">
-            <img src="{{asset('admincss/img/avatar-6.jpg')}}" alt="..." class="img-fluid rounded-circle">
+            <img src="{{asset('admincss/img/avatar-6.png')}}" alt="..." class="img-fluid rounded-circle">
         </div>
         <div class="title">
             <h1 class="h5">{{ ucwords(Auth::user()->name) }}</h1>

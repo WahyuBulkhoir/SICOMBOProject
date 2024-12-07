@@ -20,7 +20,6 @@ class Product extends Model
 
     public function Sluggable():array
     {
-
         return
         [
             'slug'=>

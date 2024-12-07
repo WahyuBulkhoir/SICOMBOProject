@@ -25,11 +25,9 @@
             </div>
         </div>
     </nav>
-
     <div class="content">
         @yield('content')
     </div>
-
     <footer>
         <div class="container">
             <p>&copy; 2024 SIGADO. All Rights Reserved.</p>

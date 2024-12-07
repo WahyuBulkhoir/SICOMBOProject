@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Order History</title>
-
     @include('home.css')
-
     <style>
         .order-container {
             margin-top: 60px;
@@ -15,7 +12,6 @@
             flex-direction: column;
             align-items: center;
         }
-
         table {
             border-collapse: collapse;
             width: 80%;
@@ -23,27 +19,23 @@
             margin-bottom: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         th,
         td {
             border: 1px solid skyblue;
             padding: 15px;
             text-align: center;
         }
-
         th {
             background-color: #343a40;
             color: white;
             font-size: 18px;
         }
-
         td img {
             width: 120px;
             height: auto;
             border-radius: 8px;
             object-fit: cover;
         }
-
         .empty-order-message {
             font-size: 22px;
             font-weight: bold;
@@ -52,16 +44,13 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="hero_area">
         @include('home.header')
     </div>
-
     <div class="order-container">
         @if($order->isEmpty())
-            <div class="empty-order-message">Kamu belom order apapun.</div>
+            <div class="empty-order-message">Kamu belum order apapun.</div>
         @else
             <table>
                 <thead>
@@ -89,8 +78,6 @@
             </table>
         @endif
     </div><br><br>
-
     @include('home.footer')
-
 </body>
 </html>

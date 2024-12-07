@@ -4,13 +4,13 @@
       <span class="animated-logo">
         <span>S</span>
         <span>I</span>
-        <span>G</span>
-        <span>A</span>
-        <span>D</span>
+        <span>C</span>
+        <span>O</span>
+        <span>M</span>
+        <span>B</span>
         <span>O</span>
       </span>
     </a>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color: #7BD5F5;">
       <ul class="navbar-nav">
         <li class="nav-item active">
@@ -29,20 +29,16 @@
           <a class="nav-link" style="color: black;" href="{{url('contact')}}">Contact Us</a>
         </li>
       </ul>
-
       <div class="user_option">
         @if (Route::has('login'))
           @auth
-            <!-- My Orders -->
             <a href="{{ url('myorders') }}">My Orders</a>
             <a href="{{ url('mycart') }}">
               <i class="fa fa-shopping-bag" aria-hidden="true"></i> [{{$count}}]
             </a>
-
-            <!-- Dropdown for Profile Picture -->
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{ asset('storage/profile_pictures/' . (Auth::user()->profile_picture ?: 'default-avatar.jpg')) }}" alt="Profile" class="profile-pic" style="width: 30px; height: 30px; border-radius: 50%;">
+              <button class="btn" style="background-color: #7BD5F5; color: black;" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Profile
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="{{ url('edit_profile') }}">Settings</a></li>
