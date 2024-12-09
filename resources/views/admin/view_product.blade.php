@@ -79,7 +79,7 @@
                     <td>{{$products->title}}</td>
                     <td>{!!Str::limit($products->description, 50)!!}</td>
                     <td>{{$products->category}}</td>
-                    <td>{{$products->price}}</td>
+                    <td>Rp {{ number_format($products->price, 0, ',', '.') }}</td>
                     <td>{{$products->quantity}}</td>
                     <td>
                         <img height="120" width="120" src="products/{{$products->image}}" alt="{{$products->title}}">

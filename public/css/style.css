@@ -63,12 +63,18 @@ body {
   padding: 0 45px;
 }
 
+.header_section {
+  padding: 10px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .hero_area.sub_pages {
   height: auto;
 }
 
 #navbarSupportedContent {
-  width: 100%;
+  width: 103%;
   background-color: skyblue;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -89,11 +95,11 @@ body {
 }
 
 #navbarSupportedContent .navbar-nav .nav-link {
-  padding: 5px 25px;
+  padding: 5px 30px;
   color: #514f4f;
   text-align: center;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 #navbarSupportedContent .nav-item.active .nav-link {
@@ -128,6 +134,7 @@ a:focus {
   font-weight: bold;
   color: #000000;
   text-transform: uppercase;
+  font-size: calc(1.5rem + 1vw);
   margin: 0;
   padding: 0;
 }
@@ -150,19 +157,12 @@ a:focus {
 }
 
 .custom_nav-container .navbar-toggler {
-  outline: none;
-}
-
-.custom_nav-container .navbar-toggler {
-  outline: none;
-}
-
-.custom_nav-container .navbar-toggler {
   padding: 0;
   width: 37px;
   height: 42px;
   -webkit-transition: all .3s;
   transition: all .3s;
+  outline: none;
 }
 
 .custom_nav-container .navbar-toggler span {
@@ -235,8 +235,7 @@ a:focus {
 .slider_section .slider_container {
   color: #fefefe;
   background-color: #000000;
-  background-color: black;
-  padding: 25px;
+  padding: 15px;
   border-radius: 0 0 15px 15px;
 }
 
@@ -257,7 +256,7 @@ a:focus {
 }
 
 .slider_section .img-box img {
-  width: 275px;
+  width: auto;
 }
 
 .slider_section .detail-box {

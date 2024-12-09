@@ -61,6 +61,7 @@
 <body>
     <div class="container-scroller">
         @include('superadmin.sidebar')
+        @include('superadmin.header')
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="card mt-5">

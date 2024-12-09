@@ -132,7 +132,7 @@
                         <td>{{ $order->rec_address }}</td>
                         <td>{{ $order->phone }}</td>
                         <td>{{ $order->product->title }}</td>
-                        <td>{{ $order->product->price }}</td>
+                        <td>Rp {{ number_format($order->product->price, 0, ',', '.') }}</td>
                         <td>
                             <img width="150" src="products/{{ $order->product->image }}">
                         </td>

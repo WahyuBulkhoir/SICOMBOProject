@@ -16,9 +16,9 @@
                         <img src="products/{{$products->image}}" alt="{{ $products->title }}">
                     </div>
                     <div class="detail-box">
-                        <h6>{{ $products->title }}</h6>
-                        <h6>
-                            <span>Rp. {{ number_format($products->price, 0, ',', '.') }}</span>
+                        <h6 class="truncate">{{ $products->title }}</h6>
+                        <h6 class="truncate">
+                            <span>Rp {{ number_format($products->price, 0, ',', '.') }}</span>
                         </h6>
                     </div>
                     <div style="padding:15px">
@@ -35,6 +35,21 @@
     </div>
 </section>
 <style>
+    .truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        max-width: 100%;
+    }
+    .detail-box h6 {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .detail-box span {
+        font-weight: bold;
+        color: #333;
+    }
     .out-of-stock {
         position: absolute;
         top: 10px;
@@ -48,8 +63,20 @@
     }
     .box {
         position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 10px;
+        margin: 10px 0;
     }
-    .img-box {
-        position: relative;
+    .img-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+    .custom-btn {
+        width: 100%;
+        margin-top: 5px;
+        font-size: 14px;
     }
 </style>

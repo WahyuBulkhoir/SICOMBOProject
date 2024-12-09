@@ -63,17 +63,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($order as $orderItem)
-                        <tr>
-                            <td style="color: #333;"><b>{{ $orderItem->product->title }}</b></td>
-                            <td style="color: #333;"><b>Rp. {{ number_format($orderItem->product->price, 0, ',', '.') }}</b></td>
+                @foreach($order as $orderItem)
+                    <tr>
+                        <td style="color: #333;"><b>{{ $orderItem->product ? $orderItem->product->title : 'Nama produk tidak tersedia.' }}</b></td>
+                        @if($orderItem->product)
+                            <td style="color: #333;"><b>Rp {{ number_format($orderItem->product->price, 0, ',', '.') }}</b></td>
                             <td style="color: #333;"><b>{{ $orderItem->status }}</b></td>
-							<td style="color: #333;"><b>{{$orderItem->payment_status}}</b></td>
+                            <td style="color: #333;"><b>{{ $orderItem->payment_status }}</b></td>
                             <td>
                                 <img src="products/{{ $orderItem->product->image }}" alt="{{ $orderItem->product->title }}">
-                            </td>                           
-                        </tr>
-                    @endforeach
+                            </td>
+                        @else
+                            <td colspan="4" style="color: red; text-align: center;">
+                                <b>Produk tidak ditemukan (seller mungkin telah menghapus produk).</b>
+                            </td>
+                        @endif
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         @endif

@@ -27,9 +27,13 @@
 <body>
   <div class="card">
     <p class="mb-4 text-sm text-gray-600">
-      {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+      {{ __('Lupa kata sandi Anda? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan mengirimkan tautan pengaturan ulang kata sandi melalui email yang memungkinkan Anda memilih kata sandi yang baru.') }}
     </p>
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    @if (session('status'))
+        <div class="mb-4 text-green-600">
+            <strong style="color: red;">*</strong>{{session('status')}}<strong style="color: red;">*</strong>
+        </div>
+    @endif
     <form method="POST" action="{{ route('password.email') }}">
       @csrf
       <div class="mb-3">

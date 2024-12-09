@@ -4,7 +4,7 @@
     @include('superadmin.css')
     <title>Candidate Members</title>
     <link rel="stylesheet" 
-          href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+          href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
         tbody tr:nth-child(odd) {
             background-color: #333;
@@ -91,13 +91,20 @@
                                     </td>
                                     <td>{{ $candidate->created_at->format('d M Y') }}</td>
                                     <td>
-                                        <a href="{{ url('delete_candidate', $candidate->id) }}" 
-                                            onclick="confirmation(candidate)" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{{ url('delete_candidate', $candidate->id) }}" class="btn btn-danger btn-sm" 
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus calon anggota ini?')">Delete</a>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">Tidak ada calon anggota ditemukan.</td>
+                                    <td class="text-center">Tidak ada calon anggota saat ini.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -108,8 +115,8 @@
         </div>
         @include('superadmin.js')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#candidateTable').DataTable({
@@ -117,10 +124,15 @@
                     "lengthMenu": [5, 10, 25, 50],
                     "ordering": true,
                     "columnDefs": [
-                        { "orderable": false, "targets": 4 }
+                        { "orderable": false, "targets": [5, 7] }
                     ]
                 });
             });
+            function confirmation(event) {
+                if (!confirm('Apakah Anda yakin ingin menghapus calon anggota ini?')) {
+                    event.preventDefault();
+                }
+            }
         </script>
     </div>
 </body>

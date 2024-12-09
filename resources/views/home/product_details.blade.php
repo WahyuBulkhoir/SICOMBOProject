@@ -7,7 +7,7 @@
       margin-top: 50px;
     }
     .product-card {
-      background-color: #e9ecef;
+      background-color: #fff;
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -25,14 +25,22 @@
       border-radius: 15px;
       margin-bottom: 20px;
       object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .product-image img:hover {
+      transform: scale(1.05);
     }
     .product-title {
       text-align: center;
       color: #007bff;
       font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 10px;
     }
     h6 {
       color: #333;
+      font-size: 16px;
+      margin-bottom: 10px;
     }
     .product-info h6 {
       font-size: 18px;
@@ -54,10 +62,11 @@
       line-height: 1.6;
       text-align: justify;
       max-width: 900px;
-      max-height: 150px;
+      max-height: 120px;
       overflow: hidden;
       position: relative;
       word-wrap: break-word;
+      transition: max-height 0.3s ease;
     }
     .product-description::after {
       content: '';
@@ -66,7 +75,14 @@
       right: 0;
       height: 30px;
       width: 100%;
-      background: linear-gradient(to top, #e9ecef, transparent);
+      background: linear-gradient(to top, #fff, transparent);
+    }
+    .expand-description {
+      color: #007bff;
+      cursor: pointer;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
     }
     .btn-box {
       margin-top: 30px;
@@ -78,6 +94,10 @@
     .custom-btn:hover {
       background-color: #0056b3;
       color: white;
+    }
+    .custom-btn {
+      width: 200px;
+      font-size: 18px;
     }
   </style>
 </head>
@@ -93,10 +113,10 @@
       <div class="product-card">
         <div class="product-image text-center">
           <img src="/products/{{ $data->image }}" alt="{{ $data->title }}">
-        </div> <br>
-        <div class="product-title">{{ $data->title }}</div> <br><br>
+        </div>
+        <div class="product-title">{{ $data->title }}</div>
         <div class="product-info">
-            <h6>Price: <span>Rp. {{ number_format($data->price, 0, ',', '.') }}</span></h6>
+            <h6>Price: <span>Rp {{ number_format($data->price, 0, ',', '.') }}</span></h6>
             <h6>Category: <span>{{ $data->category }}</span></h6>
             <h6>Available Quantity: 
                 <span>
@@ -106,7 +126,8 @@
         </div><br>
         <div class="product-description">
           <p>{{ $data->description }}</p>
-        </div><br>
+        </div>
+        <div class="expand-description" onclick="toggleDescription()">Lihat Selengkapnya</div><br><br>
         <div class="detail-box text-center">
           <a class="btn btn-outline-primary custom-btn mt-3" href="{{ url('add_cart', $data->id) }}">Add to Cart</a>
         </div>
@@ -117,5 +138,18 @@
     </div>
   </section>
   @include('home.footer')
+  <script>
+    function toggleDescription() {
+      var description = document.querySelector('.product-description');
+      var expandText = document.querySelector('.expand-description');
+      if (description.style.maxHeight === 'none') {
+        description.style.maxHeight = '120px';
+        expandText.textContent = 'Lihat Selengkapnya';
+      } else {
+        description.style.maxHeight = 'none';
+        expandText.textContent = 'Tutup Deskripsi';
+      }
+    }
+  </script>
 </body>
 </html>

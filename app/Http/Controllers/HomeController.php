@@ -68,7 +68,6 @@ class HomeController extends Controller
     {
         $data = Product::find($id);
         $isOutOfStock = $data->quantity == 0;
-
         if (Auth::id()) {
             $user = Auth::user();
             $userid = $user->id;
@@ -76,7 +75,6 @@ class HomeController extends Controller
         } else {
             $count = '';
         }
-
         return view('home.product_details', compact('data', 'count', 'isOutOfStock'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -13,6 +14,8 @@ class Product extends Model
     use HasFactory;
 
     use Sluggable;
+
+    use SoftDeletes;
 
     protected $fillable = [
         'title', 'description', 'price', 'quantity', 'category', 'image', 'seller_id',

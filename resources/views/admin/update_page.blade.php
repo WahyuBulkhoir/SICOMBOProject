@@ -59,7 +59,7 @@
     @include('admin.sidebar')
     <div class="page-content">
         <div class="page-header">
-            <h2 style="color: white; font-size: 20px;">Update Product</h2>
+            <h2 style="color: white; font-size: 20px;">Perbarui Produk</h2>
         </div>
         <div class="div_deg">
             <form action="{{url('edit_product', $data->id)}}" method="post" enctype="multipart/form-data">
@@ -94,7 +94,7 @@
                     <img width="150" src="/products/{{$data->image}}" alt="Current Image">
                 </div>
                 <div class="input_deg">
-                    <label>Product Image</label>
+                    <label>New Image</label>
                     <input type="file" name="image">
                     @error('image')
                         <div style="color: red; margin-top: 5px;">{{ $message }}</div>

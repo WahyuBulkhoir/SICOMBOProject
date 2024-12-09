@@ -71,6 +71,11 @@
         {
             color: black;
         }
+        .no-subject-message {
+            color: #333;
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +104,7 @@
                             <p>Deskripsi: {{ $meeting->description }}</p>
                         </li>
                     @empty
-                        <li>Tidak ada pertemuan saat ini.</li>
+                        <li class="no-subject-message">Tidak ada pertemuan saat ini.</li>
                     @endforelse
                 </ul>
             </div>
@@ -114,7 +119,7 @@
                             <p>Deskripsi: {{ $event->description }}</p>
                         </li>
                     @empty
-                        <li>Tidak ada event saat ini.</li>
+                        <li class="no-subject-message">Tidak ada event saat ini.</li>
                     @endforelse
                 </ul>
             </div>
@@ -160,5 +165,6 @@
             </div>
         </div>
     </section>
+    @include('home.footer')
 </body>
 </html>

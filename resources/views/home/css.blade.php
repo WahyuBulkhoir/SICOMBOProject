@@ -158,4 +158,6 @@
 .animated-logo span:nth-child(5) { animation-delay: 1.2s; }
 .animated-logo span:nth-child(6) { animation-delay: 1.5s; }
 .animated-logo span:nth-child(7) { animation-delay: 1.8s; }
-  </style>
+
+
+</style>

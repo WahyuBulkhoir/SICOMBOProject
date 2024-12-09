@@ -4,7 +4,7 @@
     @include('superadmin.css')
     <title>Daftar Seller</title>
     <link rel="stylesheet" 
-          href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+          href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
         tbody tr:nth-child(odd) {
             background-color: #333;
@@ -50,6 +50,7 @@
 <body>
     <div class="container-scroller">
         @include('superadmin.sidebar')
+        @include('superadmin.header')
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="card mt-5">
@@ -80,7 +81,7 @@
                                         <td>{{ $seller->address }}</td>
                                         <td>
                                             <a href="{{ url('view_product_byseller', $seller->id) }}" class="btn btn-info btn-sm">
-                                                View Products
+                                                <b>View Products</b>
                                             </a>
                                         </td>
                                         <td>
@@ -88,12 +89,19 @@
                                         </td>
                                         <td>
                                             <a href="{{ url('delete_seller', $seller->id) }}" class="btn btn-danger btn-sm" 
-                                            onclick="return confirm('Are you sure you want to delete this member?')">Delete</a>
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus seller ini?')">Delete</a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center">Tidak ada seller yang tersedia.</td>
+                                        <td class="text-center">Tidak ada seller saat ini.</td>
+                                        <td class="text-center">.</td>
+                                        <td class="text-center">.</td>
+                                        <td class="text-center">.</td>
+                                        <td class="text-center">.</td>
+                                        <td class="text-center">.</td>
+                                        <td class="text-center">.</td>
+                                        <td class="text-center">.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -104,8 +112,8 @@
         </div>
         @include('superadmin.js')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#sellerTable').DataTable({
@@ -117,6 +125,11 @@
                     ]
                 });
             });
+            function confirmation(event) {
+                if (!confirm("Apakah Anda yakin ingin menghapus seller ini?")) {
+                    event.preventDefault();
+                }
+            }
         </script>
     </div>
 </body>

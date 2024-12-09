@@ -60,7 +60,7 @@ class SuperAdminController extends Controller
 
     public function view_events()
     {
-        $events = Event::orderBy('created_at','desc')->get();
+        $events = Event::orderBy('created_at', 'desc')->get(); // Pastikan selalu return koleksi
         return view('superadmin.view_event', compact('events'));
     }
 

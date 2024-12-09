@@ -4,7 +4,7 @@
     @include('superadmin.css')
     <title>List of Members</title>
     <link rel="stylesheet" 
-          href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+          href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
         tbody tr:nth-child(odd) {
             background-color: #333;
@@ -50,6 +50,7 @@
 <body>
     <div class="container-scroller">
         @include('superadmin.sidebar')
+        @include('superadmin.header')
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="card mt-5">
@@ -82,12 +83,18 @@
                                     </td>
                                     <td>
                                         <a href="{{ url('delete_member', $member->id) }}" class="btn btn-danger btn-sm" 
-                                        onclick="return confirm('Are you sure you want to delete this member?')">Delete</a>
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus anggota ini?')">Delete</a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">No members available.</td>
+                                    <td class="text-center">Tidak ada anggota saat ini.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -98,8 +105,8 @@
         </div>
         @include('superadmin.js')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#memberTable').DataTable({
@@ -107,12 +114,12 @@
                     "lengthMenu": [5, 10, 25, 50],
                     "ordering": true,
                     "columnDefs": [
-                        { "orderable": false, "targets": [3, 4] }
+                        { "orderable": false, "targets": [5, 6] }
                     ]
                 });
             });
             function confirmation(event) {
-                if (!confirm("Are you sure you want to delete this member?")) {
+                if (!confirm("Apakah Anda yakin ingin menghapus anggota ini?")) {
                     event.preventDefault();
                 }
             }

@@ -27,7 +27,7 @@
 <body>
   <div class="card">
     <p class="mb-4 text-sm text-gray-600">
-      {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+      {{ __('Ini adalah area yang aman dari aplikasi. Harap konfirmasi kata sandi Anda sebelum melanjutkan.') }}
     </p>
     <form method="POST" action="{{ route('password.confirm') }}">
       @csrf

@@ -7,7 +7,7 @@
         <a href="">
           <i class="fa fa-twitter" aria-hidden="true"></i>
         </a>
-        <a href="">
+        <a href="https://www.instagram.com/pikr_bgg?igsh=dzgxZWt2eXIyZG00">
           <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
         <a href="">
@@ -23,7 +23,7 @@
               ABOUT US
             </h6>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
+            Kami disini ada untuk menyediakan beragam pilihan produk kerajinan tangan yang menarik dan tentunya memiliki nilai estetika yang tinggi. Kami juga menyediakan informasi mengenai PIK-R Bukit Gado-Gado yang menarik untuk anda ikuti dan ketahui.
             </p>
           </div>
           <div class="col-md-6 col-lg-3">
@@ -32,7 +32,7 @@
                 Newsletter
               </h5>
               <form action="#">
-                <input type="email" placeholder="Enter your email">
+                <input type="email" placeholder="sicombomail@gmail.com">
                 <button>
                   Subscribe
                 </button>
@@ -44,7 +44,7 @@
               NEED HELP
             </h6>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
+              Jika anda memiliki masalah, jangan ragu untuk menghubungi kami.
             </p>
           </div>
           <div class="col-md-6 col-lg-3">
@@ -54,7 +54,7 @@
             <div class="info_link-box">
               <a href="">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span> Jl. Limau manis Padang Sumatera Barat</span>
+                <span> RT.02/RW.02, Bukit Gado-gado, Kec. Padang Sel., Kota Padang, Sumatera Barat</span>
               </a>
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
       <div class="container">
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">SICOMBO TIM</a>
+          <a href="https://github.com/WahyuBulkhoir/SICOMBOProject">SICOMBO TIM</a>
         </p>
       </div>
     </footer>
