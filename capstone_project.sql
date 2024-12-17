@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Des 2024 pada 06.02
+-- Waktu pembuatan: 09 Des 2024 pada 09.12
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -52,7 +52,9 @@ INSERT INTO `cache` (`id`, `key`, `value`, `expiration`, `created_at`, `updated_
 (41, '472b07b9fcf2c2451e8781e944bf5f77cd8457c8:timer', 'i:1733198263;', 1733198263, NULL, NULL),
 (42, '472b07b9fcf2c2451e8781e944bf5f77cd8457c8', 'i:4;', 1733198263, NULL, NULL),
 (45, 'q@gmail.com|127.0.0.1:timer', 'i:1733409005;', 1733409005, NULL, NULL),
-(46, 'q@gmail.com|127.0.0.1', 'i:1;', 1733409005, NULL, NULL);
+(46, 'q@gmail.com|127.0.0.1', 'i:1;', 1733409005, NULL, NULL),
+(47, 'sicombo@gmail.com|127.0.0.1:timer', 'i:1733467884;', 1733467884, NULL, NULL),
+(48, 'sicombo@gmail.com|127.0.0.1', 'i:1;', 1733467884, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,9 +78,7 @@ CREATE TABLE `candidate_pikr_members` (
 --
 
 INSERT INTO `candidate_pikr_members` (`id`, `name`, `email`, `phone`, `jenis_kelamin`, `cv`, `created_at`, `updated_at`) VALUES
-(2, 'dani', 'dan@gmail.com', '089867655613', 'Laki-laki', 'cv_uploads/dani_CV.pdf', '2024-10-28 05:42:15', '2024-10-28 05:42:15'),
-(3, 'luna', 'lun@gmail.com', '087614565445', 'Perempuan', 'cv_uploads/luna_CV.pdf', '2024-10-28 05:42:47', '2024-10-28 05:42:47'),
-(4, 'maya', 'may@gmail.com', '085614528176', 'Perempuan', 'cv_uploads/maya_CV.pdf', '2024-10-28 05:43:13', '2024-10-28 05:43:13');
+(9, 'wahyu', 'wahyu@gmail.com', '086654325431', 'Laki-laki', 'cv_uploads/wahyu_CV.pdf', '2024-12-07 12:57:12', '2024-12-07 12:57:12');
 
 -- --------------------------------------------------------
 
@@ -93,6 +93,13 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
+(116, 22, 16, '2024-12-08 08:54:51', '2024-12-08 08:54:51');
 
 -- --------------------------------------------------------
 
@@ -135,14 +142,6 @@ CREATE TABLE `events` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `events`
---
-
-INSERT INTO `events` (`id`, `title`, `description`, `date`, `location`, `created_at`, `updated_at`) VALUES
-(1, 'Summer Padang Event', 'Event ini bertujuan untuk membuat kalangan masyarakat kota padang bisa menunjukkan karya atau seni yang dimiliki untuk diperlihatkan dan dipertontonkan', '2024-11-08', 'Gor Padang', '2024-10-23 06:19:33', '2024-10-23 06:19:33'),
-(2, 'Event Akhir Tahunan Padang', 'merupakan event yang dibuat setiap akhir tahun sekali untuk memeriahkan kota padang', '2024-12-20', 'Gor Haji Agus Salim', '2024-12-03 07:24:00', '2024-12-03 07:24:00');
 
 -- --------------------------------------------------------
 
@@ -213,14 +212,6 @@ CREATE TABLE `meetings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data untuk tabel `meetings`
---
-
-INSERT INTO `meetings` (`id`, `title`, `description`, `date`, `location`, `start_time`, `end_time`, `created_at`, `updated_at`) VALUES
-(1, 'Pembuatan Kerajinan Event Summer Padang', 'Meeting ini bertujuan untuk mengkordinasikan setiap anggota agar membuat karya yang menarik', '2024-10-25', 'Bukit Gado-Gado', '10:00:00', '12:00:00', '2024-10-23 06:21:07', '2024-10-23 06:21:07'),
-(2, 'Persiapan event akhir tahunan padang', 'mempersiapkan diri untuk hasil yang maksimal di event yang sedang diadakan', '2024-12-10', 'Bukit Gado-Gado', '10:00:00', '13:00:00', '2024-12-03 07:25:39', '2024-12-03 07:25:39');
-
 -- --------------------------------------------------------
 
 --
@@ -259,7 +250,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (35, '2024_11_12_084459_add_profile_picture_to_users_table', 10),
 (36, '2024_11_30_104525_add_address_to_pikr_members_table', 11),
 (37, '2024_12_02_173412_remove_profile_picture_from_users_table', 12),
-(38, '2024_12_02_173622_remove_profile_picture_from_users_table', 13);
+(38, '2024_12_02_173622_remove_profile_picture_from_users_table', 13),
+(39, '2024_12_07_112256_add_deleted_at_to_products_table', 14);
 
 -- --------------------------------------------------------
 
@@ -285,18 +277,12 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `name`, `rec_address`, `phone`, `status`, `user_id`, `product_id`, `payment_status`, `created_at`, `updated_at`) VALUES
-(46, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 18, 'cash on delivery', '2024-12-05 10:20:01', '2024-12-05 10:20:01'),
-(47, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 13, 'cash on delivery', '2024-12-05 10:20:01', '2024-12-05 10:20:01'),
-(48, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 16, 'cash on delivery', '2024-12-05 10:20:01', '2024-12-05 10:20:01'),
-(49, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 17, 'paid', '2024-12-05 10:20:47', '2024-12-05 10:20:47'),
-(50, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 15, 'paid', '2024-12-05 10:20:47', '2024-12-05 10:20:47'),
-(51, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 14, 'paid', '2024-12-05 10:20:47', '2024-12-05 10:20:47'),
-(52, 'Wahyu Kedua', 'padang', '082267773165', 'in progress', 1, 18, 'paid', '2024-12-05 10:22:18', '2024-12-05 10:22:18'),
-(53, 'Wahyu Kedua', 'padang', '082267773165', 'in progress', 1, 16, 'paid', '2024-12-05 10:22:18', '2024-12-05 10:22:18'),
-(54, 'Wahyu Kedua', 'padang', '082267773165', 'in progress', 1, 13, 'paid', '2024-12-05 10:22:18', '2024-12-05 10:22:18'),
-(55, 'Wahyu Kedua', 'padang', '082267773165', 'in progress', 1, 17, 'cash on delivery', '2024-12-05 10:22:32', '2024-12-05 10:22:32'),
-(56, 'Wahyu Kedua', 'padang', '082267773165', 'in progress', 1, 15, 'cash on delivery', '2024-12-05 10:22:32', '2024-12-05 10:22:32'),
-(57, 'Wahyu Kedua', 'padang', '082267773165', 'in progress', 1, 14, 'cash on delivery', '2024-12-05 10:22:32', '2024-12-05 10:22:32');
+(73, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 31, 'cash on delivery', '2024-12-07 13:07:25', '2024-12-07 13:07:25'),
+(74, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 30, 'cash on delivery', '2024-12-07 13:07:25', '2024-12-07 13:07:25'),
+(75, 'Profile Baru wahyu', 'pauh', '081234567891', 'Delivered', 22, 26, 'cash on delivery', '2024-12-07 13:07:25', '2024-12-08 09:41:25'),
+(76, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 27, 'cash on delivery', '2024-12-07 13:07:25', '2024-12-07 13:07:25'),
+(77, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 17, 'cash on delivery', '2024-12-08 08:47:40', '2024-12-08 08:47:40'),
+(78, 'Profile Baru wahyu', 'pauh', '081234567891', 'in progress', 22, 18, 'cash on delivery', '2024-12-08 08:49:30', '2024-12-08 08:49:30');
 
 -- --------------------------------------------------------
 
@@ -332,9 +318,7 @@ CREATE TABLE `pikr_members` (
 --
 
 INSERT INTO `pikr_members` (`id`, `name`, `email`, `phone`, `address`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
-(5, 'first member', 'apa@gmail.com', '081234567690', 'pauh', 'Laki-laki', '2024-10-28 05:40:35', '2024-11-30 03:46:17'),
-(6, 'second member', 'bro@gmail.com', '081234567698', 'limau manis', 'Laki-laki', '2024-10-28 05:44:03', '2024-11-30 03:46:33'),
-(9, 'Heru Cans', 'cans@gmail.com', '081234567698', 'padang', 'Perempuan', '2024-11-30 03:47:09', '2024-11-30 03:47:09');
+(10, 'Morgan', 'gan@gmail.com', '081234567689', 'bandung', 'Laki-laki', '2024-12-07 12:58:38', '2024-12-07 12:58:38');
 
 -- --------------------------------------------------------
 
@@ -353,20 +337,27 @@ CREATE TABLE `products` (
   `slug` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `seller_id` bigint(20) UNSIGNED DEFAULT NULL
+  `seller_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `products`
 --
 
-INSERT INTO `products` (`id`, `title`, `description`, `image`, `price`, `category`, `quantity`, `slug`, `created_at`, `updated_at`, `seller_id`) VALUES
-(13, 'boneka', 'blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla', '1730121763.png', '10000', 'Bahan Lunak Alam', '0', 'aku', '2024-10-28 06:22:43', '2024-12-05 10:22:18', 2),
-(14, 'bunga', 'qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm', '1730122510.png', '20000', 'Bahan Lunak Buatan', '0', 'adalah', '2024-10-28 06:35:10', '2024-12-05 10:22:32', 2),
-(15, 'Tas', 'Kerajinan tangan yang dibuat dari bahan rotan yang bisa menghasilkan harga tinggi', '1730122564.jpg', '100000', 'Bahan Keras Alami', '0', 'anak', '2024-10-28 06:36:04', '2024-12-05 10:22:32', 2),
-(16, 'Bunga', 'qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm', '1730122844.png', '30000', 'Limbah Lunak Organik', '0', 'gembala', '2024-10-28 06:40:44', '2024-12-05 10:22:18', 4),
-(17, 'Jam tangan', 'qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm', '1730122876.png', '5000', 'Limbah Lunak Anorganik', '0', 'yang', '2024-10-28 06:41:16', '2024-12-05 10:22:32', 4),
-(18, 'Tas Sandang', 'qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm', '1733419125.png', '40000', 'Bahan Lunak Alam', '0', 'sering', '2024-10-28 06:41:43', '2024-12-05 10:22:18', 4);
+INSERT INTO `products` (`id`, `title`, `description`, `image`, `price`, `category`, `quantity`, `slug`, `created_at`, `updated_at`, `seller_id`, `deleted_at`) VALUES
+(13, 'boneka', 'blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla', '1730121763.png', '10000', 'Bahan Lunak Alam', '0', 'aku', '2024-10-28 06:22:43', '2024-12-07 08:14:42', 2, '2024-12-07 08:14:42'),
+(14, 'bunga', 'qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm', '1730122510.png', '20000', 'Bahan Lunak Buatan', '0', 'adalah', '2024-10-28 06:35:10', '2024-12-07 04:25:12', 2, '2024-12-07 04:25:12'),
+(15, 'Tas Selempang Rajut', 'Kerajinan tangan yang dibuat dari bahan tali kur yang terlihat mewah dan punya nilai jual tinggi', '1733584949.png', '125000', 'Bahan Keras Buatan', '2', 'anak', '2024-10-28 06:36:04', '2024-12-07 10:38:41', 2, NULL),
+(16, 'Tempat Pensil', 'Merupakan kerajinan tangan yang dibuat menggunakan bahan dasar stik eskrim yang mudah untuk didapatkan', '1733592415.png', '40000', 'Bahan Keras Buatan', '2', 'gembala', '2024-10-28 06:40:44', '2024-12-07 11:07:02', 4, NULL),
+(17, 'Bunga', 'Merupakan kerajinan tangan yang membutuhkan kesabaran untuk membuatnya dan hasilnya yang memiliki nilai jual tinggi', '1733592658.png', '80000', 'Bahan Keras Buatan', '1', 'yang', '2024-10-28 06:41:16', '2024-12-08 08:47:40', 4, NULL),
+(18, 'Lampion', 'Merupakan kerajinan tangan yang dibuat menggunakan bahan dasar stik eskrim yang mudah untuk didapatkan juga memiliki keindahan tersendiri', '1733592706.png', '55000', 'Bahan Keras Buatan', '1', 'sering', '2024-10-28 06:41:43', '2024-12-08 08:49:30', 4, NULL),
+(26, 'Jam Dinding', 'Sebuah kerajinan tangan jam dinding dari limbah stik - ice cream dan baterai di Madehand Store Sebuah kerajinan tangan jam dinding dari limbah stik - ice cream dan baterai di Madehand Store Sebuah kerajinan tangan jam dinding dari limbah stik - ice cream dan baterai di Madehand Store Sebuah kerajinan tangan jam dinding dari limbah stik - ice cream dan baterai di Madehand Store Sebuah kerajinan tangan jam dinding dari limbah stik - ice cream dan baterai di Madehand Store Sebuah kerajinan tangan jam dinding dari limbah stik - ice cream dan baterai di Madehand Store', '1733580964.png', '70000', 'Bahan Keras Alami', '1', 'jam-dinding', '2024-12-07 07:16:04', '2024-12-07 13:07:25', 2, NULL),
+(27, 'Hiasan Dinding', 'Sebuah produk kerajinan tangan yang dibuat dari kertas nasi dan stik yang mudah didapatkan', '1733584833.png', '45000', 'Bahan Keras Buatan', '1', 'hiasan-dinding', '2024-12-07 08:20:33', '2024-12-07 13:07:25', 2, NULL),
+(28, 'Tempat Bumbu', 'Kerajinan tangan yang dibuat dari rotan', '1733585196.png', '60000', 'Bahan Keras Alami', '2', 'tempat-bumbu', '2024-12-07 08:26:36', '2024-12-07 08:26:36', 2, NULL),
+(29, 'Tatakan Bunga', 'Kerajinan tangan yang dibuat berdasarkan stik ice cream yang mudah didapatkan', '1733585395.png', '30000', 'Bahan Keras Buatan', '2', 'tatakan-bunga', '2024-12-07 08:29:55', '2024-12-07 08:29:55', 2, NULL),
+(30, 'Bingkai Foto', 'Sebuah kerajinan tangan yang dibuat berdasarkan bahan seperti stik es krim, kuas, kayu adhesive, gunting, dan sebagainya.', '1733592806.png', '25000', 'Bahan Keras Buatan', '1', 'bingkai-foto', '2024-12-07 10:33:26', '2024-12-07 13:07:25', 4, NULL),
+(31, 'Laci Mini', 'Laci mini ini bisa berguna untuk menyimpan barang-barang kecil yang membuat Anda sering lupa menaruhnya seperti kunci motor, kunci rumah, dan sebagainya. Untuk membuatnya, siapkan stik es krim, tang, pisau, pensil, penggaris, cat air, kotak bekas sereal, gunting dan kuas.', '1733592861.png', '120000', 'Limbah Keras Organik', '1', 'laci-mini', '2024-12-07 10:34:21', '2024-12-07 13:07:25', 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -388,7 +379,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('P6FnNJj22XWJXOCcucFnYFwyFAe4jK7P1vMWAfJD', 17, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidjM1eTFncHVMRnZGMEl5Wm4xQkNqdk52M0VLbGt4UHpDWXJOR2l0dCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3ZpZXdfbWVldGluZ3MiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxNzt9', 1733420630);
+('ej4PrR3PdABsxUzfaM6LbMs9Zvp0MVFfgESNsbkc', 17, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNTJxc1V4Q0RIRVZTUWtaVjdSbkNJQlFsaktJdjlkR0w1YnNNWlUxbiI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FkZF9zZWxsZXIiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxNzt9', 1733712732),
+('kSg40jH67b0D5YdQFp9l6LZoYcVncKCyOdKiTDWx', 17, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMjgyN0taTG5IUUZpOGhXQnltRlZRVHZ5SjhsY0xsTTBZZEQ5dFBteCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2V4cG9ydF9zZWxsZXJfcHJvZHVjdC8yIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTc7fQ==', 1733681863);
 
 -- --------------------------------------------------------
 
@@ -416,10 +408,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `usertype`, `phone`, `address`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Wahyu Kedua', 'wahyu76558@gmail.com', 'user', '082267773165', 'padang', '2024-10-22 22:19:05', '$2y$12$VI1iBVmaFlGH28K9z46o9uTneGq1Bs/8W0aBAokEdJmg0RfSWTMmu', NULL, '2024-10-22 21:36:49', '2024-12-05 10:21:33'),
-(2, 'bul seller dua', 'bulwahyu8@gmail.com', 'admin', '081234567699', 'badung', '2024-10-22 22:25:12', '$2y$12$URat849vsfYiPQegwpVsDuwAvF.7rBjMfYny298BqMMs2OOUFc2Va', NULL, '2024-10-22 22:24:10', '2024-12-02 11:13:46'),
+(2, 'bul seller dua', 'bulwahyu8@gmail.com', 'admin', '081234567699', 'badung', '2024-10-22 22:25:12', '$2y$12$URat849vsfYiPQegwpVsDuwAvF.7rBjMfYny298BqMMs2OOUFc2Va', 'W5oUttylnKKBU9CkQfMrGThIzGb7wo75UHPsIlVqvCbb0mxULe2vDa8E5e2K', '2024-10-22 22:24:10', '2024-12-02 11:13:46'),
 (4, 'seller12', 'sigadomail@gmail.com', 'admin', '085681256799', 'padang panjang', '2024-10-28 06:39:08', '$2y$12$gDvmV2JXlc9ARqEmKfTwzu.RRxu1unXl8/4RXvscS9VSuFzDd.9Vu', NULL, '2024-10-28 06:38:47', '2024-11-30 04:25:32'),
-(17, 'Admin Sicombo', 'sicombomail@gmail.com', 'superadmin', '083198617414', 'padang', '2024-12-02 07:05:29', '$2y$12$HWMDaE20/djr3ZVx77TiLuEYCCYDFo3y0wpcWUifCgNnO6QbBQvbC', NULL, '2024-12-02 07:04:18', '2024-12-02 07:05:29'),
-(22, 'Profile Baru wahyu', 'wahyubulkhoir8@gmail.com', 'user', '081234567891', 'pauh', '2024-12-02 23:16:23', '$2y$12$pc8iNIYiNKN6Jv.3TUvcleR5pbd3mznstvcPJvKXeag31HKclXp0i', 'brAaaExCqprNgk4T2OP4SgRduCBI1PHAC0mksHNSMw1skaKRi2UtTLk3ghDB', '2024-12-02 23:16:23', '2024-12-04 21:15:41');
+(17, 'Admin Sicombo', 'sicombomail@gmail.com', 'superadmin', '083198617414', 'padang', '2024-12-02 07:05:29', '$2y$12$HWMDaE20/djr3ZVx77TiLuEYCCYDFo3y0wpcWUifCgNnO6QbBQvbC', 'iL8ZrLJuHI6YlvYb6Nw9QVTAiFZs3BJPLvJ7cwvkAwcLJKLMDXDEnbqMMfFC', '2024-12-02 07:04:18', '2024-12-02 07:05:29'),
+(22, 'Profile Baru wahyu', 'wahyubulkhoir8@gmail.com', 'user', '081234567891', 'pauh', '2024-12-02 23:16:23', '$2y$12$ZFGCmGCJO6lyMJDGW.gkn.7M0C.lGYxxlqHUbyhaODK8dmDfDo9wW', 'Z7swmJVZLaIphZpFAyYLyXP768JJ1r5F4shmX41A7ojU8nzeKMXdn5gCtew6', '2024-12-02 23:16:23', '2024-12-08 05:44:32');
 
 --
 -- Indexes for dumped tables
@@ -542,19 +534,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `cache`
 --
 ALTER TABLE `cache`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT untuk tabel `candidate_pikr_members`
 --
 ALTER TABLE `candidate_pikr_members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT untuk tabel `categories`
@@ -566,7 +558,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT untuk tabel `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -584,37 +576,37 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `meetings`
 --
 ALTER TABLE `meetings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT untuk tabel `pikr_members`
 --
 ALTER TABLE `pikr_members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
