@@ -3,8 +3,9 @@
 <head>
     @include('superadmin.css')
     <title>Produk dari seller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
-          href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
         tbody tr:nth-child(odd) {
             background-color: #333;
@@ -32,6 +33,7 @@
             word-wrap: break-word;
             max-width: 500px;
         }
+        
         .btn-success {
             background-color: #28a745;
             color: white;
@@ -73,19 +75,17 @@
                         <table id="productTable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Seller ID</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
-                                    <th>Price</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
+                                    <th>Nama Produk</th>
+                                    <th>Deskripsi</th>
+                                    <th>Gambar</th>
+                                    <th>Harga</th>
+                                    <th>Kategori</th>
+                                    <th>Stok</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($products as $product)
-                                    <tr>
-                                        <td>{{ $product->seller_id }}</td>
+                            <tbody>       
+                                @forelse ($products as $product)
+                                    <tr> 
                                         <td class="tides">{{ $product->title }}</td>
                                         <td class="tides">{{ $product->description }}</td>
                                         <td>
@@ -95,7 +95,15 @@
                                         <td>{{ $product->category }}</td>
                                         <td>{{ $product->quantity }}</td>
                                     </tr>
-                                @endforeach
+                                    @empty
+                                    <tr>
+                                    <td class="text-center">Tidak ada produk untuk seller ini.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -104,8 +112,8 @@
         </div>
         @include('superadmin.js')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#productTable').DataTable({

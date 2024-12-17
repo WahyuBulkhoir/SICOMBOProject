@@ -3,6 +3,7 @@
 <head>
     @include('superadmin.css')
     <title>Daftar Seller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
           href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
@@ -61,12 +62,11 @@
                         <table id="sellerTable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Nama Seller</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Products</th>
+                                    <th>No. HP</th>
+                                    <th>Alamat</th>
+                                    <th>Produk</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -74,7 +74,6 @@
                             <tbody>
                                 @forelse ($sellers as $seller)
                                     <tr>
-                                        <td>{{ $seller->id }}</td>
                                         <td>{{ $seller->name }}</td>
                                         <td>{{ $seller->email }}</td>
                                         <td>{{ $seller->phone }}</td>
@@ -101,7 +100,6 @@
                                         <td class="text-center">.</td>
                                         <td class="text-center">.</td>
                                         <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -121,7 +119,7 @@
                     "lengthMenu": [5, 10, 25, 50],
                     "ordering": true,
                     "columnDefs": [
-                        { "orderable": false, "targets": [5, 6, 7] }
+                        { "orderable": false, "targets": [4, 5, 6] }
                     ]
                 });
             });

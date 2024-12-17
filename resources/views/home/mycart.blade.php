@@ -85,9 +85,9 @@
       <table>
         <thead>
           <tr>
-            <th>Product Title</th>
-            <th>Price</th>
-            <th>Image</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Gambar</th>
             <th>Remove</th>
           </tr>
         </thead>

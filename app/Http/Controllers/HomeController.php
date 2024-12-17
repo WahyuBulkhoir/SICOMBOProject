@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Category;
@@ -16,25 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    
-    public function index()
-    {
-        $user = User::where('usertype', 'user')->count();
-        $sellerId = auth()->id();
-        $totalCustomers = Order::whereHas('product', function ($query) use ($sellerId) {
-            $query->where('seller_id', $sellerId);
-        })->distinct('user_id')->count('user_id');
-        $totalProducts = Product::where('seller_id', $sellerId)->count();
-        $totalOrders = Order::whereHas('product', function ($query) use ($sellerId) {
-            $query->where('seller_id', $sellerId);
-        })->count();
-        $deliveredOrders = Order::where('status', 'Delivered')
-            ->whereHas('product', function ($query) use ($sellerId) {
-                $query->where('seller_id', $sellerId);
-            })->count();
-        return view('admin.index', compact('user', 'totalCustomers', 'totalProducts', 'totalOrders', 'deliveredOrders'));
-    }
-
     public function home()
     {
         $product = Product::orderBy('created_at', 'desc')->get();
@@ -173,6 +153,11 @@ class HomeController extends Controller
 
     public function stripePost(Request $request, $value)
     {
+        $max_amount = 999999999999;
+        if ($value * 100 > $max_amount) {
+            toastr()->timeOut(5000)->closeButton()->addSuccess('Jumlah pembayaran melebihi batas yang diizinkan.');
+            return redirect()->back();
+        }
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create([
             "amount" => $value * 100,
@@ -329,7 +314,7 @@ class HomeController extends Controller
         return view('home.about', compact('events', 'meetings', 'count'));
     }
 
-    public function edit_profile()
+    public function edit_profile_customer()
     {
         $user = Auth::user();
         if (Auth::check()) {
@@ -339,17 +324,20 @@ class HomeController extends Controller
         } else {
             $count = '';
         }
-        return view('home.edit_profile', compact('user', 'count'));
+        return view('home.edit_profile_customer', compact('user', 'count'));
     }
 
-    public function update_profile(Request $request)
+    public function update_profile_customer(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:255',
+        ], [
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
         ]);
-        $user = Auth::user();
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,

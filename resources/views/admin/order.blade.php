@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('admin.css')
     <link rel="stylesheet" href="{{asset('/admincss/css/custom.css')}}">
     <style type="text/css">
-        .table_center {
-            padding: 20px;
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
-        table {
-            border: 2px solid skyblue;
-            text-align: center;
+        .table_deg {
+            border: 2px solid greenyellow;
             width: 100%;
             border-collapse: collapse;
         }
-        th {
-            background-color: skyblue;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            color: white;
-        }
-        td {
-            color: white;
-            padding: 10px;
-            border: 1px solid greenyellow;
-        }
-        .table_center {
+        .div_deg {
             display: flex;
             justify-content: center;
+            padding: 20px;
             align-items: center;
-            margin-top: 20px;
+            color: white;
+            flex-direction: column;
+        }
+        td {
+            border: 1px solid greenyellow;
+            text-align: center;
+            padding: 5px;
+            word-wrap: break-word;
+            max-width: 300px;
+        }
+        th {
+            background-color: skyblue;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            border: 1px solid greenyellow;
+            word-wrap: break-word;
+            max-width: 300px;
         }
         tr:hover {
             background-color: rgba(255, 255, 255, 0.2);
@@ -109,60 +115,64 @@
                 </form>
             </div>
         </div>
-        <div class="table_center">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Customer Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Product Title</th>
-                        <th>Price</th>
-                        <th>Image</th>
-                        <th>Payment Status</th>
-                        <th>Status</th>
-                        <th>Change Status</th>
-                        <th>Print PDF</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($data as $order)
-                    <tr>
-                        <td>{{ $order->name }}</td>
-                        <td>{{ $order->rec_address }}</td>
-                        <td>{{ $order->phone }}</td>
-                        <td>{{ $order->product->title }}</td>
-                        <td>Rp {{ number_format($order->product->price, 0, ',', '.') }}</td>
-                        <td>
-                            <img width="150" src="products/{{ $order->product->image }}">
-                        </td>
-                        <td>{{ $order->payment_status }}</td>
-                        <td>
-                            @if($order->status == 'in progress')
-                                <span style="color:red">{{ $order->status }}</span>
-                            @elseif($order->status == 'On the way')
-                                <span style="color:skyblue;">{{ $order->status }}</span>
-                            @else
-                                <span style="color:yellow;">{{ $order->status }}</span>
-                            @endif
-                        </td>
-                        <td>
-                            <a class="btn btn-primary" href="{{ url('on_the_way', $order->id) }}">On The Way</a>
-                            <a class="btn btn-success" href="{{ url('delivered', $order->id) }}">Delivered</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-secondary" href="{{ url('print_pdf', $order->id) }}">Print PDF</a>
-                        </td>
-                    </tr>
-                        @empty
-                    <tr>
-                        <td colspan="10" class="text-center" style="color:white; background-color:rgba(255,255,255,0.1); padding:20px; font-size:18px;">
-                            Belum ada produk yang diorder.
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+        <div class="div_deg">
+            <div class="table-responsive">
+                <table class="table_deg">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Nama Pembeli</th>
+                            <th style="text-align: center;">Alamat</th>
+                            <th>No. HP</th>
+                            <th>Nama Produk</th>
+                            <th>Harga</th>
+                            <th>Gambar</th>
+                            <th>Status Pembayaran</th>
+                            <th>Status Orderan</th>
+                            <th>Ganti Status Orderan</th>
+                            <th>Tanggal Orderan</th>
+                            <th>Print PDF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($data as $order)
+                        <tr>
+                            <td style="text-align: left;">{{ $order->name }}</td>
+                            <td style="text-align: left;">{{ $order->rec_address }}</td>
+                            <td>{{ $order->phone }}</td>
+                            <td>{{ $order->product->title }}</td>
+                            <td>Rp {{ number_format($order->product->price, 0, ',', '.') }}</td>
+                            <td>
+                                <img height="auto" width="120" src="products/{{ $order->product->image }}">
+                            </td>
+                            <td>{{ $order->payment_status }}</td>
+                            <td>
+                                @if($order->status == 'in progress')
+                                    <span style="color:red">{{ $order->status }}</span>
+                                @elseif($order->status == 'On the way')
+                                    <span style="color:skyblue;">{{ $order->status }}</span>
+                                @else
+                                    <span style="color:yellow;">{{ $order->status }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ url('on_the_way', $order->id) }}">On The Way</a>
+                                <a class="btn btn-success" href="{{ url('delivered', $order->id) }}">Delivered</a>
+                            </td>
+                            <td>{{$order->created_at}}</td>
+                            <td>
+                                <a class="btn btn-secondary" href="{{ url('print_pdf', $order->id) }}">Print PDF</a>
+                            </td>
+                        </tr>
+                            @empty
+                        <tr>
+                            <td colspan="11" class="text-center" style="color:white; background-color:rgba(255,255,255,0.1); padding:20px; font-size:18px;">
+                                Belum ada produk yang diorder.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div style="color:white; font-size:18px; margin-top:10px; padding: 20px;">
             <strong>Total Semua Pesanan: </strong> {{ $data->count() }}

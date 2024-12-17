@@ -3,13 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        $user = User::where('usertype', 'user')->count();
+        $sellerId = auth()->id();
+        $totalCustomers = Order::whereHas('product', function ($query) use ($sellerId) {
+            $query->where('seller_id', $sellerId);
+        })->distinct('user_id')->count('user_id');
+        $totalProducts = Product::where('seller_id', $sellerId)->count();
+        $totalOrders = Order::whereHas('product', function ($query) use ($sellerId) {
+            $query->where('seller_id', $sellerId);
+        })->count();
+        $deliveredOrders = Order::where('status', 'Delivered')
+            ->whereHas('product', function ($query) use ($sellerId) {
+                $query->where('seller_id', $sellerId);
+            })->count();
+        return view('admin.index', compact('user', 'totalCustomers', 'totalProducts', 'totalOrders', 'deliveredOrders'));
+    }
 
     public function view_category()
     {
@@ -65,6 +84,7 @@ class AdminController extends Controller
             'category' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png|max:2048',
         ], [
+            'price.numeric' => 'Harga produk harus berupa angka.',
             'image.mimes' => 'Gambar harus berupa file dengan format: jpg, jpeg, atau png.',
             'image.required' => 'Gambar produk wajib diunggah.',
         ]);
@@ -166,7 +186,7 @@ class AdminController extends Controller
         $user = auth()->user();
         $orders = Order::whereHas('product', function($query) use ($user) {
             $query->where('seller_id', $user->id);
-        });
+        })->orderBy('created_at', 'desc'); 
         if ($request->has('payment_status') && $request->payment_status != '') {
             $orders = $orders->where('payment_status', $request->payment_status);
         }
@@ -203,5 +223,32 @@ class AdminController extends Controller
         $data = Order::find($id);
         $pdf = Pdf::loadView('admin.invoice',compact('data'));
         return $pdf->download('invoice.pdf');
+    }
+
+    public function edit_profile_seller()
+    {
+        $seller = Auth::user();
+        return view('admin.edit_profile_seller', compact('seller'));
+    }
+
+    public function update_profile_seller(Request $request)
+    {
+        $seller = Auth::user();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $seller->id,
+            'phone' => 'required|string|max:15',
+            'address' => 'required|string|max:255',
+        ], [
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
+        ]);
+        $seller->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+        toastr()->timeOut(5000)->closeButton()->addSuccess('Profil berhasil diperbarui.');
+        return redirect('admin/dashboard');
     }
 }

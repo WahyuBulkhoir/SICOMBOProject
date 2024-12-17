@@ -13,6 +13,7 @@ use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductSeller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdminController extends Controller
 {
@@ -29,7 +30,6 @@ class SuperAdminController extends Controller
         $codPercentage = $totalOrders > 0 ? round(($codOrders / $totalOrders) * 100, 2) : 0;
         $stripePercentage = $totalOrders > 0 ? round(($stripeOrders / $totalOrders) * 100, 2) : 0;
         $totalCustomers = Order::distinct('user_id')->count('user_id');
-
         return view('superadmin.transaction_history', [
             'codOrders' => $codOrders,
             'stripeOrders' => $stripeOrders,
@@ -50,17 +50,19 @@ class SuperAdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:today',
             'location' => 'required|string|max:255',
+        ], [
+            'date.after_or_equal' => 'Tanggal event harus hari ini atau di masa mendatang.',
         ]);
         Event::create($validated);
         toastr()->timeOut(5000)->closeButton()->addSuccess('Event berhasil ditambahkan.');
-        return redirect()->back();
+        return redirect('/view_events');
     }
 
     public function view_events()
     {
-        $events = Event::orderBy('created_at', 'desc')->get(); // Pastikan selalu return koleksi
+        $events = Event::orderBy('created_at', 'desc')->get();
         return view('superadmin.view_event', compact('events'));
     }
 
@@ -76,8 +78,10 @@ class SuperAdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required',
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:today',
             'location' => 'required|string|max:255',
+        ], [
+            'date.after_or_equal' => 'Tanggal event harus hari ini atau di masa mendatang.', 
         ]);
         $data->update($request->only(['title', 'description', 'date', 'location'
         ]));
@@ -90,7 +94,7 @@ class SuperAdminController extends Controller
          $data = Event::find($id);
          $data->delete();
          toastr()->timeOut(5000)->closeButton()->addSuccess('Event berhasil dihapus.');
-         return redirect()->back();
+         return redirect('/view_events');
     }
 
     public function add_meeting()
@@ -104,14 +108,17 @@ class SuperAdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:today',
             'location' => 'required|string|max:255',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
+        ], [
+            'date.after_or_equal' => 'Tanggal pertemuan harus hari ini atau di masa mendatang.',
+            'end_time.after' => 'Waktu selesai harus lebih besar dari waktu mulai.',
         ]);
         Meeting::create($validated);
         toastr()->timeOut(5000)->closeButton()->addSuccess('Pertemuan berhasil ditambahkan.');
-        return redirect()->back();
+        return redirect('/view_meetings');
     }
 
     public function view_meetings()
@@ -133,9 +140,13 @@ class SuperAdminController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'location' => 'required|string|max:255',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'end_time' => 'required|date_format:H:i',
+            'location' => 'required|string|max:255',
+        ], [
+            'start_time.date_format' => 'Waktu harus diatur terlebih dahulu',
+            'end_time.date_format' => 'Waktu harus diatur terlebih dahulu',
+            'end_time.after' => 'Waktu selesai harus lebih besar dari waktu mulai.',
         ]);
         $data->update($request->only([
             'title', 'description', 'date', 'location', 'start_time', 'end_time'
@@ -149,7 +160,7 @@ class SuperAdminController extends Controller
         $data = Meeting::findOrFail($id);
         $data->delete();
         toastr()->timeOut(5000)->closeButton()->addSuccess('Pertemuan berhasil dihapus.');
-        return redirect()->back();
+        return redirect('/view_meetings');
     }
 
     public function viewCandidateMembers()
@@ -163,27 +174,31 @@ class SuperAdminController extends Controller
          $data = CandidatePikrMember::find($id);
          $data->delete();
          toastr()->timeOut(5000)->closeButton()->addSuccess('Calon anggota berhasil dihapus.');
-         return redirect()->back();
+         return redirect('/candidate_member');
     }
 
     public function add_member(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:pikr_members,email',
+            'email' => 'required|email|unique:users,email',
+            'status' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+        ], [
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
         ]);
         PikrMember::create([
             'name' => $request->name,
             'email' => $request->email,
+            'status' => $request->status,
             'phone' => $request->phone,
             'address' => $request->address,
             'jenis_kelamin' => $request->jenis_kelamin,
         ]);
         toastr()->timeOut(5000)->closeButton()->addSuccess('Anggota berhasil ditambahkan.');
-        return redirect()->back();
+        return redirect('/view_members');
     }
 
     public function showAddMember()
@@ -210,12 +225,15 @@ class SuperAdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:pikr_members,email,' . $id,
+            'status' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+        ], [
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
         ]);
         $data->update($request->only([
-            'name', 'email', 'phone', 'address', 'jenis_kelamin'
+            'name', 'email', 'status', 'phone', 'address', 'jenis_kelamin'
         ]));
         toastr()->timeOut(5000)->closeButton()->addSuccess('Data anggota berhasil diperbarui.');
         return redirect('/view_members');
@@ -226,7 +244,7 @@ class SuperAdminController extends Controller
         $data = PikrMember::findOrFail($id);
         $data->delete();
         toastr()->timeOut(5000)->closeButton()->addSuccess('Anggota berhasil dihapus.');
-        return redirect()->back();
+        return redirect('/view_members');
     }
 
     public function view_seller()
@@ -260,37 +278,47 @@ class SuperAdminController extends Controller
     {
         $seller = User::where('id', $id)->where('usertype', 'admin')->first();
         if (!$seller) {
-            return redirect()->back()->with('error', 'Seller not found or not an admin.');
+            toastr()->timeOut(5000)->closeButton()->addSuccess('Seller tidak ditemukan atau bukan merupakan admin.');
+            return redirect()->back();
         }
         return view('superadmin.edit_seller', compact('seller'));
     }
 
     public function update_seller(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:15',
-            'address' => 'required|string|max:255',
-        ]);
         $seller = User::where('id', $id)->where('usertype', 'admin')->first();
         if (!$seller) {
-            return redirect()->back()->with('error', 'Seller tidak ditemukan.');
+            toastr()->timeOut(5000)->closeButton()->addError('Seller tidak ditemukan.');
+            return redirect('/edit_seller');
         }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Gunakan $id seller
+            'phone' => 'required|string|max:15',
+            'address' => 'required|string|max:255',
+        ], [
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
+        ]);
         $seller->name = $request->input('name');
         $seller->email = $request->input('email');
         $seller->phone = $request->input('phone');
         $seller->address = $request->input('address');
         $seller->save();
-        return redirect('view_seller')->with('success', 'Seller berhasil diperbarui.');
+        toastr()->timeOut(5000)->closeButton()->addSuccess('Seller berhasil diperbarui.');
+        return redirect('/view_seller');
     }
 
     public function delete_seller($id)
     {
         $seller = User::where('id', $id)->where('usertype', 'admin')->first();
-        $seller->delete();
-        toastr()->timeOut(5000)->closeButton()->addSuccess('Seller berhasil dihapus.');
-        return redirect()->back();
+        if ($seller) {
+            $seller->products()->delete();
+            $seller->delete();
+            toastr()->timeOut(5000)->closeButton()->addSuccess('Seller berhasil dihapus.');
+        } else {
+            toastr()->timeOut(5000)->closeButton()->addError('Seller tidak ditemukan atau tidak valid.');
+        }
+        return redirect('/view_seller');
     }
 
     public function add_seller(Request $request)
@@ -317,12 +345,39 @@ class SuperAdminController extends Controller
             'usertype' => 'admin',
         ]);
         toastr()->timeOut(5000)->closeButton()->addSuccess('Seller berhasil ditambahkan.');
-        return redirect()->back();
+        return redirect('/view_seller');
     }
 
     public function showAddSeller()
     {
         return view('superadmin.add_seller');
+    }
+
+    public function edit_profile_admin()
+    {
+        $user = Auth::user();
+        return view('superadmin.edit_profile_admin', compact('user'));
+    }
+
+    public function update_profile_admin(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'address' => 'required|string|max:255',
+        ], [
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
+        ]);
+        $user->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+        ]);
+        toastr()->timeOut(5000)->closeButton()->addSuccess('Kamu telah berhasil memperbarui profil');
+        return redirect('/edit_profile_admin');
     }
 }
 

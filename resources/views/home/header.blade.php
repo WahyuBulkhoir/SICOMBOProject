@@ -23,9 +23,9 @@
           <li class="nav-item">
             <a class="nav-link" style="color: black;" href="{{url('shop')}}">Shop</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" style="color: black;" href="{{url('testimonial')}}">Testimonial</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" style="color: black;" href="{{url('about')}}">About Us</a>
           </li>
@@ -45,7 +45,7 @@
                   Profile
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="color: black;">
-                  <li><a class="dropdown-item" href="{{ url('edit_profile') }}">Settings</a></li>
+                  <li><a class="dropdown-item" href="{{ url('edit_profile_customer') }}">Settings</a></li>
                   <li>
                     <form method="POST" action="{{ route('logout') }}">
                       @csrf

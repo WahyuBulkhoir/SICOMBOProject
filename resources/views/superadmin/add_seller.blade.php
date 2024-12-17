@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('superadmin.css')
     <style>
         .form-container {
@@ -54,7 +55,7 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="form-container">
-                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Seller Baru</h2>
+                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Seller Baru</h2><br><br>
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul>
@@ -68,7 +69,7 @@
                     <form action="{{ url('add_seller') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Nama Seller</label>
                             <input type="text" name="name" id="name" class="form-control" placeholder="Enter seller name" required>
                         </div>
                         <div class="form-group">
@@ -76,11 +77,11 @@
                             <input type="email" name="email" id="email" class="form-control" placeholder="Enter seller email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">No. HP</label>
                             <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter seller phone number" required>
                         </div>
                         <div class="form-group">
-                            <label for="address">Address</label>
+                            <label for="address">Alamat</label>
                             <input type="text" name="address" id="address" class="form-control" placeholder="Enter seller address" required>
                         </div>
                         <div class="form-group">
@@ -88,7 +89,7 @@
                             <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
                         </div>
                         <div class="form-group">
-                            <label for="password_confirmation">Confirm Password</label>
+                            <label for="password_confirmation">Konfirmasi Password</label>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm password" required>
                         </div>
                         <div class="button-container">
@@ -97,6 +98,7 @@
                     </form>
                 </div>
             </div>
+            @include('superadmin.footer')
         </div>
         @include('superadmin.js')
     </div>

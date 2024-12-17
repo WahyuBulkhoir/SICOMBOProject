@@ -11,7 +11,8 @@ route::get('/',[HomeController::class,'home']);
 route::get('/dashboard',[HomeController::class,'login_home'])->middleware(['auth', 'verified'])->name('dashboard');
 route::get('/myorders',[HomeController::class,'myorders'])->middleware(['auth', 'verified']);
 require __DIR__.'/auth.php';
-route::get('admin/dashboard',[HomeController::class,'index'])->middleware(['auth','admin']);
+
+route::get('admin/dashboard',[AdminController::class,'index'])->middleware(['auth','admin']);
 route::get('superadmin/dashboard', [SuperAdminController::class, 'index'])->middleware(['auth', 'superadmin']);
 Route::get('/transaction_history', [SuperAdminController::class, 'transaction_history'])->middleware(['auth', 'superadmin']);
 route::get('view_category',[AdminController::class,'view_category'])->middleware(['auth','admin']);
@@ -68,8 +69,8 @@ route::get('print_pdf/{id}',[AdminController::class, 'print_pdf'])->middleware([
 Route::get('export_orders', function () {
     return Excel::download(new OrderExport, 'orders.xlsx');
 })->middleware(['auth', 'admin']);
-Route::get('edit_profile', [HomeController::class, 'edit_profile'])->name('edit_profile')->middleware(['auth', 'verified']);
-Route::post('update_profile', [HomeController::class, 'update_profile'])->name('update_profile')->middleware(['auth', 'verified']);
+Route::get('edit_profile_customer', [HomeController::class, 'edit_profile_customer'])->name('edit_profile_customer')->middleware(['auth', 'verified']);
+Route::post('update_profile_customer', [HomeController::class, 'update_profile_customer'])->name('update_profile_customer')->middleware(['auth', 'verified']);
 Route::get('view_seller', [SuperAdminController::class, 'view_seller'])->middleware('auth','superadmin');
 Route::get('view_product_byseller/{id}', [SuperAdminController::class, 'view_product_byseller'])->middleware('auth','superadmin');
 Route::get('export_seller_product/{id}', [SuperAdminController::class, 'export_seller_product'])->middleware('auth','superadmin');
@@ -78,3 +79,7 @@ Route::put('update_seller/{id}', [SuperAdminController::class, 'update_seller'])
 route::get('delete_seller/{id}',[SuperAdminController::class,'delete_seller'])->middleware(['auth','superadmin']);
 route::post('add_seller', [SuperAdminController::class, 'add_seller'])->middleware(['auth', 'superadmin']);
 Route::get('add_seller', [SuperAdminController::class, 'showAddSeller'])->middleware(['auth', 'superadmin']);
+Route::get('edit_profile_admin', [SuperAdminController::class, 'edit_profile_admin'])->name('edit_profile_admin')->middleware(['auth', 'verified']);
+Route::post('update_profile_admin', [SuperAdminController::class, 'update_profile_admin'])->name('update_profile_admin')->middleware(['auth', 'verified']);
+Route::get('edit_profile_seller', [AdminController::class, 'edit_profile_seller'])->name('edit_profile_seller')->middleware(['auth', 'verified']);
+Route::post('update_profile_seller', [AdminController::class, 'update_profile_seller'])->name('update_profile_seller')->middleware(['auth', 'verified']);

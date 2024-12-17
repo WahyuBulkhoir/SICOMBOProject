@@ -39,9 +39,8 @@
     @include('admin.sidebar')
     <div class="page-content">
         <div class="page-header">
-            <h1 style="color: white; font-size: 20px;">Update Category</h1>
+            <h1 style="color: white; font-size: 20px;">Perbarui Kategori</h1>
         </div>
-
         <div class="div_deg">            
             <form action="{{url('update_category',$data->id)}}" method="post">
                 @csrf

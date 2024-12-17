@@ -59,49 +59,39 @@
     @include('admin.sidebar')
     <div class="page-content">
         <div class="page-header">
-            <h2 style="color: white; font-size: 20px;">Perbarui Produk</h2>
+            <h2 style="color: white; font-size: 20px;">Edit Profile</h2>
         </div>
         <div class="div_deg">
-            <form action="{{url('edit_product', $data->id)}}" method="post" enctype="multipart/form-data">
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            <form action="{{ url('update_profile_seller') }}" method="POST">
                 @csrf
                 <div>
-                    <label style="color: white;">Nama Produk</label>
-                    <input type="text" name="title" value="{{$data->title}}" required>
+                    <label style="color: white;">Nama</label>
+                    <input type="text" name="name" class="form-control" value="{{$seller->name}}" required>
+                </div>
+                <div class="form-group">
+                    <label style="color: white;">Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ $seller->email }}" required>
                 </div>
                 <div>
-                    <label style="color: white;">Deskripsi</label>
-                    <textarea name="description" required>{{$data->description}}</textarea>
+                    <label style="color: white;">No. HP</label>
+                    <input type="text" name="phone" class="form-control" value="{{$seller->phone}}" required>
                 </div>
                 <div>
-                    <label style="color: white;">Harga</label>
-                    <input type="text" name="price" value="{{$data->price}}" required>
+                    <label style="color: white;">Alamat</label>
+                    <input type="text" name="address" class="form-control" value="{{$seller->address}}" required>
                 </div>
                 <div>
-                    <label style="color: white;">Stok</label>
-                    <input type="number" name="quantity" value="{{$data->quantity}}" required>
-                </div>
-                <div>
-                    <label style="color: white;">Kategori</label>
-                    <select name="category" required>
-                        <option value="{{$data->category}}">{{$data->category}}</option>
-                        @foreach($category as $category)
-                        <option value="{{$category->category_name}}">{{$category->category_name}}</option>
-                        @endforeach
-                    </select>            		
-                </div>
-                <div>
-                    <label style="color: white;">Gambar saat ini</label>
-                    <img height="auto" width="120" src="/products/{{$data->image}}" alt="Current Image">
-                </div>
-                <div class="input_deg">
-                    <label style="color: white;">Gambar baru</label>
-                    <input type="file" name="image">
-                    @error('image')
-                        <div style="color: red; margin-top: 5px;">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div>
-                    <input class="btn btn-success" type="submit" value="Update Product">
+                    <input class="btn btn-success" type="submit" value="Update Profile">
                 </div>
             </form>
         </div> 

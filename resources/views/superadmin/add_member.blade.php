@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('superadmin.css')
     <style>
         .form-container {
@@ -54,11 +55,21 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="form-container">
-                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Anggota</h2>
+                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Anggota</h2><br><br>
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form action="{{ url('add_member') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Nama Anggota</label>
                             <input type="text" name="name" class="form-control" placeholder="Enter member name" required>
                         </div>
                         <div class="form-group">
@@ -66,11 +77,15 @@
                             <input type="email" name="email" class="form-control" placeholder="Enter member email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="status">Status Anggota</label>
+                            <input type="text" name="status" class="form-control" placeholder="Enter member status" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">No. HP</label>
                             <input type="text" name="phone" class="form-control" placeholder="Enter member phone number" required>
                         </div>
                         <div class="form-group">
-                            <label for="address">Address</label>
+                            <label for="address">Alamat</label>
                             <input type="text" name="address" class="form-control" placeholder="Enter member address" required>
                         </div>
                         <div class="form-group">
@@ -87,6 +102,7 @@
                     </form>
                 </div>
             </div>
+            @include('superadmin.footer')
         </div>
         @include('superadmin.js')
     </div>

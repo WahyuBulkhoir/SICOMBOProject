@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="d-sm-flex justify-content-center justify-content-sm-between">
         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © sicombo-tim 2024</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> SuperAdmin Template</a> from sicombo-tim</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> SICOMBO Template</a> from sicombo-tim</span>
     </div>
 </footer>

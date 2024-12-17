@@ -13,6 +13,7 @@ class PikrMember extends Model
     protected $fillable = [
         'name',
         'email',
+        'status',
         'phone',
         'address',
         'jenis_kelamin',

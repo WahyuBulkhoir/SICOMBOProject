@@ -71,7 +71,7 @@
         <div>
             <table class="table_deg">
                 <tr>
-                    <th>Category Name</th>
+                    <th>Nama Kategori</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>

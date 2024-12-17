@@ -49,6 +49,10 @@
             justify-content: center;
             margin-top: 20px;
         }
+        h2 {
+            color: white;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -58,7 +62,8 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="form-container">
-                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Event Baru</h2><br><br>
+                    <h2>Edit Profile</h2><br><br>
+                    <div class="div_deg">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul>
@@ -69,33 +74,34 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <form action="{{ url('store_event') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="title">Judul Event</label>
-                            <input type="text" name="title" class="form-control" placeholder="Enter event title" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Deskripsi</label>
-                            <textarea name="description" class="form-control" placeholder="Enter event description" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Tanggal</label>
-                            <input type="date" name="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Lokasi</label>
-                            <input type="text" name="location" class="form-control" placeholder="Enter event location" required>
-                        </div>
-                        <div class="button-container">
-                            <button type="submit" class="btn btn-success mt-3">Add Event</button>
-                        </div>
-                    </form>
+                        <form action="{{ url('update_profile_admin') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label style="color: white;">Nama</label>
+                                <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: white;">Email</label>
+                                <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: white;">No. HP</label>
+                                <input type="text" name="phone" class="form-control" value="{{ $user->phone }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: white;">Alamat</label>
+                                <input type="text" name="address" class="form-control" value="{{ $user->address }}" required>
+                            </div>
+                            <div class="button-container">
+                                <button type="submit" class="btn btn-success mt-3">Update Seller</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                @include('superadmin.footer')
             </div>
-            @include('superadmin.footer')
+            @include('superadmin.js')
         </div>
-        @include('superadmin.js')
     </div>
 </body>
 </html>

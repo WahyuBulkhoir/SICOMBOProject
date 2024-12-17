@@ -60,32 +60,32 @@
             <form action="{{url('upload_product')}}" method="Post" enctype="multipart/form-data">
                 @csrf
                 <div class="input_deg">
-                    <label>Product Title</label>
+                    <label>Nama Produk</label>
                     <input type="text" name="title" required>
                 </div>
                 <div class="input_deg">
-                    <label>Description</label>
+                    <label>Deskripsi</label>
                     <textarea name="description" required></textarea>
                 </div>
                 <div class="input_deg">
-                    <label>Price</label>
+                    <label>Harga</label>
                     <input type="text" name="price" required>
                 </div>
                 <div class="input_deg">
-                    <label>Quantity</label>
+                    <label>Stok</label>
                     <input type="number" name="qty" required>
                 </div>
                 <div class="input_deg">
-                    <label>Product Category</label>
+                    <label>Kategori Produk</label>
                     <select name="category" required>
-                        <option>Select Option</option>
+                        <option>Pilih Opsi</option>
                         @foreach($category as $category)
                             <option value="{{$category->category_name}}">{{$category->category_name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="input_deg">
-                    <label>Product Image</label>
+                    <label>Gambar Produk</label>
                     <input type="file" name="image" required>
                     @error('image')
                         <div style="color: red; margin-top: 5px;">{{ $message }}</div>

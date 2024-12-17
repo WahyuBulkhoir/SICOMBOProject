@@ -116,9 +116,9 @@
         </div>
         <div class="product-title">{{ $data->title }}</div>
         <div class="product-info">
-            <h6>Price: <span>Rp {{ number_format($data->price, 0, ',', '.') }}</span></h6>
-            <h6>Category: <span>{{ $data->category }}</span></h6>
-            <h6>Available Quantity: 
+            <h6>Harga: <span>Rp {{ number_format($data->price, 0, ',', '.') }}</span></h6>
+            <h6>Kategori: <span>{{ $data->category }}</span></h6>
+            <h6>Stok yang tersedia: 
                 <span>
                     {{ $data->quantity > 0 ? $data->quantity : 'Stok habis' }}
                 </span>

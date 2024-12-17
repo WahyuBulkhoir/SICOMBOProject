@@ -77,7 +77,7 @@
         <form action="{{ url('search_shop') }}" method="GET">
             <input type="search" name="search" placeholder="Cari produk berdasarkan nama...">
             <select name="category" required>
-                <option value="">Select Category</option>
+                <option value="">Pilih Kategori</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
                 @endforeach

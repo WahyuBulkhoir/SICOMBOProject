@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     @include('superadmin.css')
-    <title>List of Members</title>
+    <title>Daftar Anggota</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
           href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
@@ -61,10 +62,11 @@
                     <table id="memberTable" class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Nama Anggota</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
+                                <th>Status Anggota</th>
+                                <th>No. HP</th>
+                                <th>Alamat</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -75,6 +77,7 @@
                                 <tr>
                                     <td>{{ $member->name }}</td>
                                     <td>{{ $member->email }}</td>
+                                    <td>{{ $member->status }}</td>
                                     <td>{{ $member->phone }}</td>
                                     <td>{{ $member->address }}</td>
                                     <td>{{ $member->jenis_kelamin }}</td>
@@ -89,6 +92,7 @@
                             @empty
                                 <tr>
                                     <td class="text-center">Tidak ada anggota saat ini.</td>
+                                    <td class="text-center">.</td>
                                     <td class="text-center">.</td>
                                     <td class="text-center">.</td>
                                     <td class="text-center">.</td>
@@ -114,7 +118,7 @@
                     "lengthMenu": [5, 10, 25, 50],
                     "ordering": true,
                     "columnDefs": [
-                        { "orderable": false, "targets": [5, 6] }
+                        { "orderable": false, "targets": [6, 7] }
                     ]
                 });
             });

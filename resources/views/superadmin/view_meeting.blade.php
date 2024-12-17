@@ -3,6 +3,7 @@
 <head>
     @include('superadmin.css')
     <title>List of Meetings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
         href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
@@ -66,12 +67,12 @@
                         <table id="meetingTable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
+                                    <th>Judul Pertemuan</th>
+                                    <th>Deskripsi</th>
+                                    <th>Tanggal</th>
+                                    <th>Lokasi</th>
+                                    <th>Waktu Mulai</th>
+                                    <th>Waktu Berakhir</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -97,14 +98,14 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center">Tidak ada pertemuan saat ini.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
+                                    <td class="text-center">Tidak ada pertemuan saat ini.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

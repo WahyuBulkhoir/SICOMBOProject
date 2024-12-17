@@ -3,6 +3,7 @@
 <head>
     @include('superadmin.css')
     <title>Candidate Members</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
           href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
@@ -57,19 +58,19 @@
             <div class="content-wrapper">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h3>Calon Anggota</h3>
+                        <h3>Daftar Calon Anggota</h3>
                     </div>
                     <div class="card-body">
                         <table id="candidateTable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
+                                    <th>Nama Calon Anggota</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
+                                    <th>No. HP</th>
                                     <th>Jenis Kelamin</th>
                                     <th>CV</th>
-                                    <th>Created At</th>
+                                    <th>Dibuat Pada</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>

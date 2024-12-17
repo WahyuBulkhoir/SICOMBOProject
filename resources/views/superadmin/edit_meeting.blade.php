@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('superadmin.css')
     <style>
         .form-container {
@@ -57,40 +58,51 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="form-container">
-                    <h2 style="color: white;">Perbarui Pertemuan</h2>
+                    <h2 style="text-align: center; margin-bottom: 20px;">Edit Pertemuan</h2><br><br>
                     <div class="div_deg">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                         <form action="{{ url('update_meeting', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label style="color: white;">Title</label>
+                                <label style="color: white;">Judul Pertemuan</label>
                                 <input type="text" name="title" class="form-control" value="{{ $data->title }}" required>
                             </div>
                             <div class="form-group">
-                                <label style="color: white;">Description</label>
+                                <label style="color: white;">Deskripsi</label>
                                 <textarea name="description" class="form-control" required>{{ $data->description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label style="color: white;">Date</label>
+                                <label style="color: white;">Tanggal</label>
                                 <input type="date" name="date" class="form-control" value="{{ $data->date }}" required>
                             </div>
                             <div class="form-group">
-                                <label style="color: white;">Location</label>
-                                <input type="text" name="location" class="form-control" value="{{ $data->location }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label style="color: white;">Start Time</label>
+                                <label style="color: white;">Waktu Mulai</label>
                                 <input type="time" name="start_time" class="form-control" value="{{ $data->start_time }}" required>
                             </div>
                             <div class="form-group">
-                                <label style="color: white;">End Time</label>
+                                <label style="color: white;">Waktu Berakhir</label>
                                 <input type="time" name="end_time" class="form-control" value="{{ $data->end_time }}" required>
                             </div>
+                            <div class="form-group">
+                                <label style="color: white;">Lokasi</label>
+                                <input type="text" name="location" class="form-control" value="{{ $data->location }}" required>
+                            </div>
                             <div class="button-container">
-                                <button type="submit" class="btn btn-success">Update Meeting</button>
+                                <button type="submit" class="btn btn-success mt-3">Update Meeting</button>
                             </div>
                         </form>
                     </div>
                 </div>
+                @include('superadmin.footer')
             </div>
             @include('superadmin.js')
         </div>

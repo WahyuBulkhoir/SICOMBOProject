@@ -25,11 +25,35 @@
                     <i class="fa fa-long-arrow-left"></i>
                 </button>
             </div>
-            <div class="list-inline-item logout">                   
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <input type="submit" value="Logout" class="btn btn-danger">
-                </form>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="avatar me-2">
+                        <img src="{{ asset('admincss/img/avatar-6.png') }}" alt="..." class="img-fluid rounded-circle" style="width: 35px; height: 35px;">
+                    </div>
+                    <div class="title">
+                        <span class="d-none d-md-block text-white">{{ ucwords(Auth::user()->name) }}
+                            <i class="fa fa-chevron-down text-white"></i>
+                        </span>
+                    </div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li>
+                        <a class="dropdown-item" href="{{ url('edit_profile_seller') }}">
+                            <i class="fa fa-user me-2"></i>Setting
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="fa fa-sign-out me-2"></i>Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

@@ -1,7 +1,8 @@
+<div class="row p-0 m-0 proBanner" id="proBanner"></div>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-    <a class="sidebar-brand brand-logo" href=""><img src="{{ asset('superadmincss/images/sicombo.svg') }}" alt="logo" /></a>
-    <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="{{ asset('superadmincss/images/logo-mini.svg') }}" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo"><img src="{{ asset('superadmincss/images/sicombo.svg') }}" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo-mini"><img src="{{ asset('superadmincss/images/logo-mini.svg') }}" alt="logo" /></a>
   </div>
   <ul class="nav">
     <li class="nav-item profile">
@@ -21,7 +22,7 @@
       </div>
     </li>
     <li class="nav-item nav-category">
-      <span class="nav-link">Navigation</span>
+      <span class="nav-link">Navigasi</span>
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('superadmin/dashboard')}}">
@@ -41,9 +42,9 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{url('add_member')}}">* Add Member </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('view_members')}}">* View Member </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('candidate_member')}}">* Candidate Member </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('add_member')}}">↪ Add Member </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('view_members')}}">↪ View Member </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('candidate_member')}}">↪ Candidate Member </a></li>
         </ul>
       </div>
     </li>
@@ -57,8 +58,8 @@
       </a>
       <div class="collapse" id="path">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{url('add_seller')}}">* Add Seller </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('view_seller')}}">* View Seller </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('add_seller')}}">↪ Add Seller </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('view_seller')}}">↪ View Seller </a></li>
         </ul>
       </div>
     </li>
@@ -72,20 +73,12 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{url('add_event')}}">* Add Event</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('view_events')}}">* View Events</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('add_meeting')}}">* Add Meeting</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('view_meetings')}}">* View Meetings</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('add_event')}}">↪ Add Event</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('view_events')}}">↪ View Events</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('add_meeting')}}">↪ Add Meeting</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{url('view_meetings')}}">↪ View Meetings</a></li>
         </ul>
       </div>
-    </li>
-    <li class="nav-item menu-items">
-      <a class="nav-link" href="documentation">
-        <span class="menu-icon">
-          <i class="mdi mdi-file-document-box"></i>
-        </span>
-        <span class="menu-title">Documentation</span>
-      </a>
     </li>
   </ul>
 </nav>

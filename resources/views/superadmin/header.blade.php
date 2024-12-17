@@ -1,6 +1,6 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo-mini" href="index.html">
+        <a class="navbar-brand brand-logo-mini">
             <img src="{{asset('superadmincss/images/logo-mini.svg')}}" alt="logo" />
         </a>
     </div>
@@ -9,11 +9,14 @@
             <span class="mdi mdi-menu"></span>
         </button>
         <ul class="navbar-nav w-100">
-            <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                    <input type="text" class="form-control" placeholder="Search products">
-                </form>
-            </li>
+        <li class="nav-item w-100">
+            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search marquee-container">
+                <div class="marquee">
+                    <a>Hallo Admin! Semoga hari anda menyenangkan! 😊</a>
+                    <a>Tetap semangat dan produktif ya! 🚀</a>
+                </div>
+            </form>
+        </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">
@@ -36,7 +39,10 @@
                             </div>
                         </div>
                         <div class="preview-item-content">
-                            <p class="preview-subject mb-1">Settings</p>
+                            <form method="GET" action="{{ url('edit_profile_admin') }}">
+                                @csrf
+                                <input type="submit" value="Setting" class="btn btn-success">
+                            </form>
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>

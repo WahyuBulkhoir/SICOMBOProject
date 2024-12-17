@@ -3,8 +3,9 @@
 <head>
     @include('superadmin.css')
     <title>List of Events</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
-          href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
+        href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
     <style>
         tbody tr:nth-child(odd) {
             background-color: #333;
@@ -66,10 +67,10 @@
                         <table id="eventTable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
+                                    <th>Judul Event</th>
+                                    <th>Deskripsi</th>
+                                    <th>Tanggal</th>
+                                    <th>Lokasi</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -91,12 +92,12 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center">Tidak ada event saat ini.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
-                                        <td class="text-center">.</td>
+                                    <td class="text-center">Tidak ada event saat ini.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
+                                    <td class="text-center">.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

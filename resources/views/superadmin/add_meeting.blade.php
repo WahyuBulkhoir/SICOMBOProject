@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('superadmin.css')
     <style>
         .form-container {
@@ -57,31 +58,41 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="form-container">
-                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Pertemuan Baru</h2>
+                    <h2 style="text-align: center; margin-bottom: 20px;">Tambah Pertemuan Baru</h2><br><br>
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form action="{{ url('store_meeting') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="title">Title</label>
+                            <label for="title">Judul Pertemuan</label>
                             <input type="text" name="title" class="form-control" placeholder="Enter meeting title" required>
                         </div>
                         <div class="form-group">
-                            <label for="description">Description</label>
+                            <label for="description">Deskripsi</label>
                             <textarea name="description" class="form-control" placeholder="Enter meeting description" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="date">Date</label>
+                            <label for="date">Tanggal</label>
                             <input type="date" name="date" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="start_time">Start Time</label>
+                            <label for="start_time">Waktu Mulai</label>
                             <input type="time" name="start_time" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="end_time">End Time</label>
+                            <label for="end_time">Waktu Berakhir</label>
                             <input type="time" name="end_time" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="location">Location</label>
+                            <label for="location">Lokasi</label>
                             <input type="text" name="location" class="form-control" placeholder="Enter meeting location" required>
                         </div>
                         <div class="button-container">
@@ -90,6 +101,7 @@
                     </form>
                 </div>
             </div>
+            @include('superadmin.footer')
         </div>
         @include('superadmin.js')
     </div>

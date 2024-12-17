@@ -55,11 +55,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Delivered Status</th>
-						<th>Payment Method</th>
-                        <th>Image</th> 
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Status Pengiriman</th>
+						<th>Metode Pembayaran</th>
+                        <th>Gambar</th> 
                     </tr>
                 </thead>
                 <tbody>
