@@ -21,23 +21,24 @@
         .table_deg {
             text-align: center;
             margin: auto;
-            border: 2px solid yellowgreen;
+            border: 2px solid greenyellow;
             margin-top: 50px;
             width: 600px;
             border-radius: 10px;
             overflow: hidden;
         }
         th {
-            background-color: skyblue;
+            background-color: #7BD5F5;
             padding: 15px;
             font-size: 20px;
             font-weight: bold;
             color: white;
+            border: 2px solid greenyellow;
         }
         td {
             color: white;
             padding: 10px;
-            border: 1px solid skyblue;
+            border: 2px solid greenyellow;
         }
         .btn-primary {
             background-color: #007bff;
@@ -75,7 +76,6 @@
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
-
                 @foreach($data as $data)
                 <tr>
                     <td>{{$data->category_name}}</td>

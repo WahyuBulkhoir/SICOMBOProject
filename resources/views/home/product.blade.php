@@ -69,8 +69,6 @@
         margin: 10px 0;
     }
     .img-box img {
-        width: 100%;
-        height: auto;
         border-radius: 8px;
         object-fit: cover;
     }

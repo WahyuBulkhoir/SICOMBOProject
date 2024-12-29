@@ -86,7 +86,7 @@
                 </div>
                 <div class="input_deg">
                     <label>Gambar Produk</label>
-                    <input type="file" name="image" required>
+                    <input style="color: white;" type="file" name="image" required>
                     @error('image')
                         <div style="color: red; margin-top: 5px;">{{ $message }}</div>
                     @enderror

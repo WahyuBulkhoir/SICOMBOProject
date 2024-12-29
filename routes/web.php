@@ -52,7 +52,8 @@ Route::get('edit_member/{id}', [SuperAdminController::class, 'edit_member'])->mi
 Route::post('update_member/{id}', [SuperAdminController::class, 'update_member'])->middleware(['auth', 'superadmin']);
 route::get('delete_member/{id}', [SuperAdminController::class, 'delete_member'])->middleware(['auth', 'superadmin']);
 Route::get('/candidate_member', [SuperAdminController::class, 'viewCandidateMembers'])->name('candidate_member');
-route::get('testimonial',[HomeController::class,'testimonial']);
+Route::get('testimonial', [HomeController::class, 'testimonial'])->name('testimonial')->middleware(['auth', 'verified']);
+Route::post('view_testimonial', [HomeController::class, 'view_testimonial'])->name('view_testimonial')->middleware(['auth', 'verified']);
 route::get('contact',[HomeController::class,'contact']);
 route::get('add_cart/{id}',[HomeController::class,'add_cart'])->middleware(['auth', 'verified']);
 route::get('mycart',[HomeController::class,'mycart'])->middleware(['auth', 'verified']);
@@ -62,7 +63,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('stripe/{value}', 'stripe');
     Route::post('stripe/{value}', 'stripePost')->name('stripe.post');
 });
-route::get('view_orders',[AdminController::class, 'view_orders'])->middleware(['auth', 'verified'])->middleware(['auth','admin']);
+route::get('view_orders',[AdminController::class, 'view_orders'])->middleware(['auth', 'verified']);
 route::get('on_the_way/{id}',[AdminController::class, 'on_the_way'])->middleware(['auth','admin']);
 route::get('delivered/{id}',[AdminController::class, 'delivered'])->middleware(['auth','admin']);
 route::get('print_pdf/{id}',[AdminController::class, 'print_pdf'])->middleware(['auth','admin']);
@@ -83,3 +84,4 @@ Route::get('edit_profile_admin', [SuperAdminController::class, 'edit_profile_adm
 Route::post('update_profile_admin', [SuperAdminController::class, 'update_profile_admin'])->name('update_profile_admin')->middleware(['auth', 'verified']);
 Route::get('edit_profile_seller', [AdminController::class, 'edit_profile_seller'])->name('edit_profile_seller')->middleware(['auth', 'verified']);
 Route::post('update_profile_seller', [AdminController::class, 'update_profile_seller'])->name('update_profile_seller')->middleware(['auth', 'verified']);
+Route::post('/send-message', [HomeController::class, 'sendMessage'])->name('send.message')->middleware(['auth', 'verified']);;

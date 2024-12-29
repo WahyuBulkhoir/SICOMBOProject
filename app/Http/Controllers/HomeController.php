@@ -10,17 +10,18 @@ use App\Models\Category;
 use App\Models\Event;
 use App\Models\Meeting;
 use App\Models\CandidatePikrMember;
+use App\Models\Testimonial;
 use Stripe;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        $product = Product::orderBy('created_at', 'desc')->get();
+        $product = Product::orderBy('created_at', 'desc')->take(12)->get();
         $count = '';
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
             $userid = $user->id;
             $count = Cart::where('user_id', $userid)->count();
@@ -272,17 +273,26 @@ class HomeController extends Controller
 
     public function testimonial()
     {
-        if (Auth::id()) 
-        {
-            $user = Auth::user();
-            $userid = $user->id;
-            $count = Cart::where('user_id',$userid)->count();
-        }
-        else
-        {
-            $count = '';
-        }     
-        return view('home.testimonial',compact('count'));
+        $count = Auth::check() ? Cart::where('user_id', Auth::id())->count() : 0;
+        $testimonials = Testimonial::with('user')->latest()->get();
+        return view('home.testimonial', compact('count', 'testimonials'));
+    }
+
+    public function view_testimonial(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+        Testimonial::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        toastr()->timeOut(5000)->closeButton()->addSuccess(
+            'Testimoni berhasil ditambahkan.'
+        );
+        return redirect()->back();
     }
 
     public function contact()
@@ -345,6 +355,28 @@ class HomeController extends Controller
         ]);
         toastr()->timeOut(5000)->closeButton()->addSuccess(
             'Kamu telah berhasil memperbarui profil'
+        );
+        return redirect()->back();
+    }
+
+    public function sendMessage(Request $request)
+    {
+        $userEmail = Auth::check() ? Auth::user()->email : $request->input('email');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => Auth::check() ? 'nullable' : 'required|email',
+            'phone' => 'required',
+            'description' => 'required|string',
+        ]);
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $userEmail,
+            'phone' => $request->input('phone'),
+            'description' => $request->input('description'),
+        ];
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new \App\Mail\ContactFormMail($data));
+        toastr()->timeOut(5000)->closeButton()->addSuccess(
+            'Pesan kamu berhasil dikirim'
         );
         return redirect()->back();
     }

@@ -23,16 +23,16 @@
             border-collapse: collapse;
         }
         th {
-            background-color: skyblue;
-            border: 1px solid greenyellow;
-            color: white;
+            background-color: #7BD5F5;
+            border: 2px solid greenyellow;
+            color: #ffffff;
             font-size: 19px;
             font-weight: bold;
             padding: 15px;
             text-align: center;
         }
         td {
-            border: 1px solid greenyellow;
+            border: 2px solid greenyellow;
             text-align: center;
             color: white;
             padding: 10px;

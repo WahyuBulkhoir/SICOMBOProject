@@ -23,9 +23,9 @@
           <li class="nav-item">
             <a class="nav-link" style="color: black;" href="{{url('shop')}}">Shop</a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" style="color: black;" href="{{url('testimonial')}}">Testimonial</a>
-          </li> -->
+          </li>
           <li class="nav-item">
             <a class="nav-link" style="color: black;" href="{{url('about')}}">About Us</a>
           </li>

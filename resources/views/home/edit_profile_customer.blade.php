@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <form action="{{ url('update_profile') }}" method="POST">
+            <form action="{{ url('update_profile_customer') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group">

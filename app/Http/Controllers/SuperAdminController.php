@@ -293,7 +293,7 @@ class SuperAdminController extends Controller
         }
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Gunakan $id seller
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:255',
         ], [

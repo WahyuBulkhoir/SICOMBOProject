@@ -24,26 +24,30 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-5 px-0">
-          <form action="#">
-          @csrf
+        <form action="{{ route('send.message') }}" method="POST">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @csrf
             <div>
-              <input type="text" placeholder="Name" />
+                <input type="text" name="name" placeholder="Name" required />
             </div>
             <div>
-              <input type="email" placeholder="Email" />
+                <input type="text" name="phone" placeholder="Phone" required />
             </div>
             <div>
-              <input type="text" placeholder="Phone" />
+                <textarea name="description" class="form-control" placeholder="Message" required></textarea>
             </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message" />
+            <div class="d-flex">
+                <button type="submit">KIRIM</button>
             </div>
-            <div class="d-flex ">
-              <button>
-                KIRIM
-              </button>
-            </div>
-          </form>
+        </form>
         </div>
       </div>
     </div>

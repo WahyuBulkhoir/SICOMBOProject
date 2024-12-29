@@ -23,18 +23,18 @@
             flex-direction: column;
         }
         td {
-            border: 1px solid greenyellow;
+            border: 2px solid greenyellow;
             text-align: center;
             padding: 5px;
             word-wrap: break-word;
             max-width: 300px;
         }
         th {
-            background-color: skyblue;
+            background-color: #7BD5F5;
             text-align: center;
-            color: white;
+            color:rgb(255, 255, 255);
             font-weight: bold;
-            border: 1px solid greenyellow;
+            border: 2px solid greenyellow;
             word-wrap: break-word;
             max-width: 300px;
         }
@@ -156,7 +156,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-primary" href="{{ url('on_the_way', $order->id) }}">On The Way</a>
-                                <a class="btn btn-success" href="{{ url('delivered', $order->id) }}">Delivered</a>
+                                <a class="btn btn-warning" href="{{ url('delivered', $order->id) }}">Delivered</a>
                             </td>
                             <td>{{$order->created_at}}</td>
                             <td>
